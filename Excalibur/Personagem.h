@@ -1,55 +1,41 @@
 #ifndef PERSONAGEM_H
 #define PERSONAGEM_H
-//falta inclusão de arquivos SFML
-#include <Texture.hpp>
-#include <Sprite.hpp>
-
+#include <SFML\Graphics.hpp>
+#include "Animacao.h"
+#include "Colisor.h"
 
 class Personagem
 {
+public: 
+	Personagem();
+	~Personagem();
+};
 
-    protected:
-        int vida;
-        int ataque;
-        int id;
-        float x; //atributo para verificar a posição do personagem
-        float y;
-        //atributos gráficos
-        sf::Texture texture;
-        sf::Sprite sprite; //verificar depois se está correto
+/**
+class Personagem
+{
+ protected:
+	int health;
+	int attack;
+	int id;
 
-    public:
-        Personagem(int v, int a, int i, float xi, float yi);//falta o parâmetro de inicializar a imagem
-        Personagem();
-        virtual ~Personagem();
+public:
+	Personagem(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float jumpHeight);
+	~Personagem();
 
-        //respectivas funções gets e sets
-        void setVida(const int v);
-        int getVida() const;
-
-        void setAtaque(const int a);
-        int getAtaque() const;
-
-        void setId(const int i);
-        int getId() const;
+	void Update(float deltaTime);
+	void Draw(sf::RenderWindow &window);
+	void OnCollision(sf::Vector2f direcao);
 
 
-        void setX(const float xi);
-        int getX() const;
+	sf::Vector2f GetPosition() { return body.getPosition(); }
+	Colisor GetCollider() { return Colisor(body); }
 
-        void setY(const float yi);
-        int getY()const;
-
-        //funções para parte gráfica do personagem
-        virtual void mover()=0;
-        virtual void desenhar();
-
-        //função para carregar uma textura chamando uma função da SFML
-        void carregaTextura(const std::string &filename, const IntRect &area=IntRect());
-
-        //qui vai precisar de funções para o sprite, ou podemos pensar em usar a função
-        //desenhar para esse fiz
-
+private:
+	sf::RectangleShape body; //personagem
+	Animacao animacao; //personagem
+	unsigned int row; //personagem
+	bool faceRight; //personagem
 };
 
 #endif // PERSONAGEM_H

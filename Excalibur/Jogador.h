@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Animacao.h"
 #include "Colisor.h"
+//#include "Arma.h"
 
 class Jogador
 {

@@ -27,10 +27,7 @@ Jogador::~Jogador()
 void Jogador::Update(float deltaTime)
 {
 	
-	velocidade.x *= 0.5f; //soltar botao para de mover
-	//desaleceração do personagem ao inicio de cada frame
-	//menor = desacelera mais rápido
-	
+	velocidade.x *= 0.5f; //soltar botao para de mover, desaceleração do personagem (menor = mais rápido)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		velocidade.x -= speed;
@@ -38,17 +35,17 @@ void Jogador::Update(float deltaTime)
 		velocidade.x += speed;
 
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && canJump)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && canJump)
 	{
 		canJump = false; //pular apenas uma vez -> já está pulando
 		
 		velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight); //gravidade 9.81 -> 100 unidades sfml = 1 metro
-						//sinal negativo -> sfml invertido no eixo Y
+														   //sinal negativo -> sfml invertido no eixo Y
 														   //squareroot (2.0f * gravity * jumpHeight);
 														   //V(2gh) -> torricelli
 	}
 
-	velocidade.y += 981.0f * deltaTime; // jump
+	velocidade.y += 981.0f * deltaTime; //gravidade
 
 	if (velocidade.x == 0.0f)
 	{
