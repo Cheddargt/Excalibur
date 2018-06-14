@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animacao.h" />
+    <ClInclude Include="Personagem.h" />
     <ClInclude Include="Colisor.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Menu.h" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animacao.cpp" />
+    <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Colisor.cpp" />
     <ClCompile Include="Excalibur.cpp" />
     <ClCompile Include="Jogador.cpp" />

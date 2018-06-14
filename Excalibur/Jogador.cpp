@@ -2,8 +2,10 @@
 #include "Jogador.h"
 
 
-Jogador::Jogador(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float jumpHeight) :
-	animacao(texture, imageCount, switchTime)
+Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id, float jumpHeight) :
+	Personagem(texture, imageCount, switchTime, speed, health, attack, id)
+	/**Personagem (sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id)**/
+
 {
 	this->speed = speed;
 	this->jumpHeight = jumpHeight;

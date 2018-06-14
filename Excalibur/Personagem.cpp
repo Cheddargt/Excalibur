@@ -1,21 +1,17 @@
+#include "stdafx.h"
 #include "Personagem.h"
 
-Personagem::Personagem()
-{}
-
-Personagem::~Personagem()
+Personagem::Personagem(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id)
+	: animacao(texture, imageCount, switchTime)
 {
+	this->switchTime = switchTime;
+	this->speed = speed;
+	this->health = health;
+	this->attack = attack;
+	this->id = id;
+	row = 0;
 
-}
 
-/**
-//Funções construtoras e destrutoras
-Personagem::Personagem(sf::Texture* texture, int health, int attack, int id, float switchTime, float speed)
-{
-
-    this->health = health;
-    this->attack = attack;
-    this->id = id;
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow &window);
@@ -26,6 +22,4 @@ Personagem::Personagem(sf::Texture* texture, int health, int attack, int id, flo
 
 Personagem::~Personagem()
 {
-    
 }
-**/
