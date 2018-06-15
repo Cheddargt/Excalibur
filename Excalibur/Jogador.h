@@ -4,7 +4,7 @@
 #include "Colisor.h"
 #include "Personagem.h"
 
-class Jogador : private Personagem
+class Jogador : public Personagem
 {
 public:
 	Jogador(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id, float jumpHeight);
@@ -18,8 +18,8 @@ public:
 	Colisor GetCollider() { return Colisor(body); }
 
 private:
-	sf::Vector2f velocidade; //pra pular
 	bool canJump;
+	bool isJumping;
 	float jumpHeight; //200.f
 
 

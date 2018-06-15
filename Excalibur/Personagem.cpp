@@ -9,9 +9,6 @@ Personagem::Personagem(sf::Texture* texture, sf::Vector2u imageCount, float swit
 	this->health = health;
 	this->attack = attack;
 	this->id = id;
-	row = 0;
-
-
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow &window);
