@@ -70,6 +70,11 @@ void Jogador::Update(float deltaTime)
 			faceRight = false;
 	}
 
+	if (velocidade.x > 0.0f)
+		faceRight = true;
+	else if (velocidade.x < 0.0f)
+		faceRight = false;
+
 
 
 

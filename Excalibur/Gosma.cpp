@@ -93,5 +93,7 @@ void Gosma::OnCollision(sf::Vector2f direcao)
 	{
 		//Colisão em cima
 		velocidade.y = 0.0f;
+		setVida(1);
+		printf("vida gosma: %d\n", getVida());
 	}
 }

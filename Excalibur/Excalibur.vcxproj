@@ -156,6 +156,7 @@
     <ClInclude Include="Animacao.h" />
     <ClInclude Include="Gosma.h" />
     <ClInclude Include="Inimigo.h" />
+    <ClInclude Include="Morcego.h" />
     <ClInclude Include="Personagem.h" />
     <ClInclude Include="Colisor.h" />
     <ClInclude Include="Jogador.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Animacao.cpp" />
     <ClCompile Include="Gosma.cpp" />
     <ClCompile Include="Inimigo.cpp" />
+    <ClCompile Include="Morcego.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Colisor.cpp" />
     <ClCompile Include="Excalibur.cpp" />
