@@ -25,9 +25,12 @@ public:
 	virtual void Update(float deltaTime) = 0; //declarada em inimigo / personagem
 	virtual void Draw(sf::RenderWindow &window) = 0; //declarada em inimigo / personagem
 	virtual void OnCollision(sf::Vector2f direcao) = 0; //declarada em inimigo / personagem
+	virtual void ColidiuPersonagem(sf::Vector2f direcao, int dano) = 0;
 	sf::Vector2f SetVelocidade(float x, float y) { velocidade.x = x; velocidade.y = y; }
+	sf::Vector2f SetPosition(float x, float y) { body.setPosition(x, y); }
 	sf::Vector2f GetPosition() { return body.getPosition(); } //não sei se serão virtual tb
 	Colisor GetCollider() { return Colisor(body); } //não sei se serão virtual tb
+	int getAttack() { return attack; }
 
 };
 

@@ -10,6 +10,7 @@ Personagem::Personagem(sf::Texture* texture, sf::Vector2u imageCount, float swit
 	this->attack = attack;
 	this->id = id;
 
+	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow &window);
 	void OnCollision(sf::Vector2f direcao);

@@ -9,9 +9,11 @@ Gosma::Gosma(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, fl
 	faceRight = false;
 	moveRight = false;
 
-	void Update(float deltaTime);
-	void Draw(sf::RenderWindow &window);
-	void OnCollision(sf::Vector2f direcao);
+	//void Update(float deltaTime);
+	//void Draw(sf::RenderWindow &window);
+	//void OnCollision(sf::Vector2f direcao);
+	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
+
 
 	body.setSize(sf::Vector2f(50.0f, 50.0f));
 	body.setOrigin(body.getSize() / 2.0f);
@@ -67,33 +69,70 @@ void Gosma::Draw(sf::RenderWindow& window)
 
 void Gosma::OnCollision(sf::Vector2f direcao)
 {
-	if (direcao.x < 0.0f)
-	{
-		//Colisão na direita
+	if (direcao.x < 0.0f) //Colisão à esquerda
+	{ 
 		velocidade.x = 0.0f;
 		moveRight = false;
-		printf("colidiu\n");
+		//printf("colidiu\n");
 
 	}
 
-	else if (direcao.x > 0.0f)
+	else if (direcao.x > 0.0f) //Colisão à direita
 	{
-		//Colisão na esquerda
+		
 		velocidade.x = 0.0f;
 		moveRight = true;
-		printf("colidiu\n");
+		//printf("colidiu\n");
 	}
 
-	if (direcao.y < 0.0f)
+	if (direcao.y < 0.0f) //Colisão embaixo
 	{
-		//Colisão embaixo
 		velocidade.y = 0.0f;
 	}
-	else if (direcao.y > 0.0f)
+	else if (direcao.y > 0.0f) //Colisão em cima
 	{
-		//Colisão em cima
+		
 		velocidade.y = 0.0f;
-		setVida(1);
-		printf("vida gosma: %d\n", getVida());
+	
+		//printf("vida gosma: %d\n", getVida());
 	}
+}
+
+void Gosma::ColidiuPersonagem(sf::Vector2f direcao, int dano)
+{
+	//if (direcao.x < 0.0f)
+	//{
+	//	//Colisão na esquerda
+	//	if (velocidade.x)
+	//	{
+	//		velocidade.x = -(jumpHeight / 3);
+	//	}
+
+
+	//}
+
+	//else if (direcao.x > 0.0f)
+	//{
+	//	//Colisão na direita
+	//	velocidade.x = (jumpHeight / 3);
+	//}
+
+	//if (direcao.y < 0.0f)
+	//{
+	//	//Colisão embaixo
+	//	velocidade.y = -(jumpHeight / 3);
+	//}
+	//else if (direcao.y > 0.0f)
+	//{
+	//	////Colisão em cima
+	//	//velocidade.y = 0.0f;
+	//}
+
+	//if ((direcao.y < 0.0f) && (direcao.x == 0.0f)) //remover bug do pulo
+	//{
+	//	//Colisão embaixo
+	//	velocidade.y = -(jumpHeight / 3);
+	//	row = 0;
+	//}
+
 }
