@@ -16,8 +16,9 @@ Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTim
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setPosition(100.0f, 200.0f);
-	//body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f)
-	//body.setPosition(1575.0f, 200.0); //(100.0f, 200.0f)
+	//body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
+	//body.setPosition(1575.0f, 200.0); //(100.0f, 200.0f) 
+	//body.setPosition(1275.0f, 375.0f); //(100.0f, 200.0f) //gosma
 
 	body.setTexture(texture);
 }
