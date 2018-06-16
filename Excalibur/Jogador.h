@@ -15,7 +15,6 @@ public:
 	void OnCollision(sf::Vector2f direcao);
 	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
 
-
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	Colisor GetCollider() { return Colisor(body); }
 
