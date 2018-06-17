@@ -9,8 +9,10 @@ view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT))
 {
 	playerTexture.loadFromFile("tux_menino.png"); //verificar
 	player2Texture.loadFromFile("tux_menina.png");
-	player = new Jogador(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 0, 200.f); //speed = 100.0f
+
 	player2 = new Jogador(&player2Texture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 1, 200.f);
+	player = new Jogador(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 0, 200.f); //speed = 100.0f
+
 	//textura, linhas x colunas animação, animação swaptime, speed, health, ataque, id, jumpHeight
 	menu = new Menu(window.getSize().x, window.getSize().y);
 	/*menu(window.getSize().x, window.getSize().y);*/
