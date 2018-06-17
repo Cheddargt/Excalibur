@@ -4,7 +4,8 @@
 
 Fase1::Fase1()
 {
-	twoplayers = nullptr;
+	/*twoplayers = nullptr;*/
+	/*std::cout << twoplayers << std::endl;*/
 	void ResizeView(const sf::RenderWindow& window, sf::View& view);
 	
 }
@@ -15,6 +16,10 @@ Fase1::~Fase1()
 
 void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers)
 {
+	this->twoplayers = twoplayers; //ok
+
+	std::cout << *twoplayers << std::endl;
+
 	backgroundTexture.loadFromFile("background.png");
 	plataformaTexture.loadFromFile("plataforma.png");
 
@@ -73,7 +78,7 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 
 	}
 
-	if (twoplayers)
+	if (*twoplayers)
 		player2.playerUpdate(deltaTime, twoplayers);
 
 	player.playerUpdate(deltaTime, twoplayers);
@@ -111,11 +116,11 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 
 	for (Morcego& morcego : morcegos)
 	{
-		if (morcego.GetCollider().CheckCollision(&(player.GetCollider()), direcao, 0.5f))
+		if (morcego.GetCollider().CheckPlayerCollision(&(player.GetCollider()), direcao, 1.0f))
 		{
+
 			player.ColidiuPersonagem(direcao, morcego.getAttack());
-			player.OnCollision(direcao);
-			morcego.OnCollision(direcao);
+			morcego.ColidiuPersonagem(direcao, player.getAttack());
 
 		}
 
@@ -123,7 +128,7 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 		{
 			player2.ColidiuPersonagem(direcao, morcego.getAttack());
 			player2.OnCollision(direcao);
-			morcego.OnCollision(direcao);
+			morcego.ColidiuPersonagem(direcao, player.getAttack());
 
 		}
 				
@@ -131,9 +136,9 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 
 	if (player.GetCollider().CheckPlayerCollision(&(gosma.GetCollider()), direcao, 1.0f)) //mudei pra check player collision
 	{
-		player.OnCollision(direcao);
+		/*player.OnCollision(direcao);*/
 		player.ColidiuPersonagem(direcao, gosma.getAttack());
-		gosma.OnCollision(direcao);
+		gosma.ColidiuPersonagem(direcao, player.getAttack());
 	}
 
 	if (player2.GetCollider().CheckPlayerCollision(&(gosma.GetCollider()), direcao, 1.0f)) //mudei pra check player collision
@@ -150,7 +155,7 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 	window.draw(background);
 	window.setView(view);
 	player.Draw(window);
-	if (twoplayers)
+	if (*twoplayers)
 		player2.Draw(window);
 	gosma.Draw(window);
 	//morcego.Draw(window);

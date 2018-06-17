@@ -12,12 +12,13 @@ view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT))
 
 	player2 = new Jogador(&player2Texture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 1, 200.f);
 	player = new Jogador(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 0, 200.f); //speed = 100.0f
-
 	//textura, linhas x colunas animação, animação swaptime, speed, health, ataque, id, jumpHeight
 	menu = new Menu(window.getSize().x, window.getSize().y);
 	/*menu(window.getSize().x, window.getSize().y);*/
 	deltaTime = 0.0f;
-	two_players = true;
+	two_players = false;
+	/*twoplayers = &two_players;*/
+	std::cout << two_players << std::endl;
 	
 
 	
@@ -68,7 +69,7 @@ void Jogo::Executar()
 		}
 		
 		fase01.Executar(*player, *player2, window, view, &two_players); //& = player.funcao na fase e * = player->funcao
-
+		//mando o endereço de two_players pro ponteiro *twoplayers
 	}
 	
 }

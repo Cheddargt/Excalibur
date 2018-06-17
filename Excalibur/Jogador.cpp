@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Jogador.h"
-using namespace std;
+#include <iostream>
 #define KNOCKBACK_X 1000
 #define KNOCKBACK_Y 320
 #define JUMP_SWITCHTIME 0.6f
@@ -19,11 +19,13 @@ Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTim
 	
 	if (this->id == 1)
 	{
-		body.setPosition(40.0f, 200.0f);
+		body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
+		/*body.setPosition(40.0f, 200.0f);*/
 	}
-	else
+	else if (this->id == 0)
 	{
-		body.setPosition(100.0f, 200.0f);
+		body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
+		/*body.setPosition(100.0f, 200.0f);*/
 	}
 
 	
@@ -48,6 +50,9 @@ Jogador::~Jogador()
 void Jogador::playerUpdate(float deltaTime, bool* twoplayers)
 {
 
+	this->twoplayers = twoplayers; //ok
+
+	std::cout << *twoplayers << std::endl;
 
 	velocidade.x *= 0.5f;
 
@@ -61,16 +66,22 @@ void Jogador::playerUpdate(float deltaTime, bool* twoplayers)
 			row = 5;
 	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) //insert player 1
+		*twoplayers = true;
+		
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) //remove player 2
+		*twoplayers = false;
+	
 
 	if (id == 0)
 	{
-	
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			velocidade.x -= speed;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			velocidade.x += speed;
 
-		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && (canJump) && !(isJumping))
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && (canJump) && !(isJumping) && (row != 3))
 		{
 			switchTime = JUMP_SWITCHTIME; //para o pulo
 
@@ -80,22 +91,20 @@ void Jogador::playerUpdate(float deltaTime, bool* twoplayers)
 			isJumping = true;
 			canJump = false;
 
-			velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight); //gravidade 9.81 -> 100 unidades sfml = 1 metro
-															   //sinal negativo -> sfml invertido no eixo Y
-															   //squareroot (2.0f * gravity * jumpHeight);
-															   //V(2gh) -> torricelli
-
+			velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight); 
+			//gravidade 9.81 -> 100 unidades sfml = 1 metro	 //sinal negativo -> sfml invertido no eixo Y
+			//squareroot (2.0f * gravity * jumpHeight);		//V(2gh) -> torricellii
 		}
 	}
 
-	if (id == 1)
+	if ((id == 1) && (*twoplayers))
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 			velocidade.x -= speed;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			velocidade.x += speed;
 
-		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && (canJump) && !(isJumping))
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && (canJump) && !(isJumping) && (row != 3))
 		{
 			switchTime = JUMP_SWITCHTIME; //para o pulo
 
@@ -105,12 +114,9 @@ void Jogador::playerUpdate(float deltaTime, bool* twoplayers)
 			isJumping = true;
 			canJump = false;
 
-			velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight); //gravidade 9.81 -> 100 unidades sfml = 1 metro
-															   //sinal negativo -> sfml invertido no eixo Y
-															   //squareroot (2.0f * gravity * jumpHeight);
-															   //V(2gh) -> torricelli
-
-
+			velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight); 
+			//gravidade 9.81 -> 100 unidades sfml = 1 metro	 //sinal negativo -> sfml invertido no eixo Y
+			//squareroot (2.0f * gravity * jumpHeight);		//V(2gh) -> torricelli
 		}
 	}
 
@@ -153,18 +159,11 @@ void Jogador::playerUpdate(float deltaTime, bool* twoplayers)
 	}
 
 
-	if (this->id == 1)
+	if ((this->id == 1) && (*twoplayers))
 	{
-		if (twoplayers)
-		{
 			animacao.Update(row, deltaTime, faceRight);
 			body.setTextureRect(animacao.uvRect);
 			body.move(velocidade * deltaTime); //move não ser mais frame-específico
-		}
-		else //undraw player 2
-		{
-			
-		}
 	}
 	
 }
@@ -219,47 +218,55 @@ void Jogador::OnCollision(sf::Vector2f direcao)
 
 void Jogador::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
-	if (direcao.x < 0.0f) //Colisão à esquerda
-	{
+	if ((direcao.x < 0.0f) && (row != 3))  // added row != 3
+	{ //Colisão à esquerda
 		velocidade.y = -(KNOCKBACK_Y);
-		velocidade.x = KNOCKBACK_X;
+		velocidade.x = (KNOCKBACK_X);
 		switchTime = 0.3f;
 		row = 3;
+		
 
 	}
 
-	else if (direcao.x > 0.0f)
-	{
-	
-		//Colisão na direita
+	else if ((direcao.x > 0.0f) && (row != 3)) //added row != 3
+	{ //Colisão na direita
+		
+		
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = -(KNOCKBACK_X);
 		switchTime = 0.3f; //volta ao normal
-		row = 3;
+		row = 3; 
 	}
 
-	if ((direcao.y < 0.0f) && (direcao.x == 0.0f)) //Colisão embaixo
+	if ((direcao.y < 0.0f) && (row != 3)) //Colisão embaixo //added row != 3
 	{
 		switchTime = JUMP_SWITCHTIME;
-		if((row != 2) && (row != 3))
-			row = 2;
 
+		printf("esse caso");
+		row = 2;
 		velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight);
 		isJumping = true;
 		canJump = false;
 
+		/*velocidade.y = -(KNOCKBACK_Y);*/
+		velocidade.x = -(KNOCKBACK_X);
+		switchTime = 0.3f; //volta ao normal
+
 	}
-	else if (direcao.y > 0.0f) //colisão em cima ARRUMAR
+
+	else if ((direcao.y > 0.0f) && (row !=3 )) //colisão em cima ARRUMAR
 	{
-		velocidade.y = (KNOCKBACK_Y);
 
-		if (faceRight)
-			velocidade.x = -(KNOCKBACK_X);
-		else 
-			velocidade.x = (KNOCKBACK_X);
+			/*velocidade.y = (KNOCKBACK_Y);*/
 
-		switchTime = 0.3f; 
-		row = 3;
+			if (faceRight)
+				velocidade.x = -(KNOCKBACK_X);
+			else
+				velocidade.x = (KNOCKBACK_X);
+
+			switchTime = 0.3f;
+			row = 3;
+
 	}
 
 }

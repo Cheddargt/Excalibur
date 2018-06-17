@@ -32,22 +32,16 @@ Gosma::~Gosma()
 void Gosma::Update(float deltaTime)
 {
 	if (moveRight)
-	{ 
 		velocidade.x = speed;
-	}
 	else
-	{
 		velocidade.x = -speed;
-	}
 		
 
 
 	velocidade.y += 981.0f * deltaTime; //gravidade
 
 	if (velocidade.x == 0.0f)
-	{
 		row = 0;
-	}
 	else
 	{
 		row = 1;
@@ -70,65 +64,40 @@ void Gosma::Draw(sf::RenderWindow& window)
 
 void Gosma::OnCollision(sf::Vector2f direcao)
 {
-	if (direcao.x < 0.0f) //Colisão à esquerda
+	if (direcao.x < 0.0f) //Colisão à direita
 	{ 
 		velocidade.x = 0.0f;
 		moveRight = false;
-		//printf("colidiu\n");
-
 	}
 
-	else if (direcao.x > 0.0f) //Colisão à direita
+	else if (direcao.x > 0.0f) //Colisão à esquerda
 	{
-		
 		velocidade.x = 0.0f;
 		moveRight = true;
-		//printf("colidiu\n");
 	}
 
 	if (direcao.y < 0.0f) //Colisão embaixo
-	{
 		velocidade.y = 0.0f;
-	}
 	else if (direcao.y > 0.0f) //Colisão em cima
-	{
-		
 		velocidade.y = 0.0f;
-	
-		//printf("vida gosma: %d\n", getVida());
-	}
 }
 
 void Gosma::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
-	if (direcao.x < 0.0f)
+	if (direcao.x < 0.0f)  //Colisão na direita
 	{
-		//Colisão na esquerda
 		velocidade.x = 0.0f;
+		moveRight = false;
 	}
 
-	else if (direcao.x > 0.0f)
+	else if (direcao.x > 0.0f) //Colisão na esquerda
 	{
-		//Colisão na direita
 		velocidade.x = 0.0f;
+		moveRight = true;
 	}
 
-	if (direcao.y < 0.0f)
-	{
-		//Colisão embaixo
+	if (direcao.y < 0.0f) ////Colisão em cima
 		velocidade.y = 0.0f;
-	}
-	else if (direcao.y > 0.0f)
-	{
-		////Colisão em cima
+	else if (direcao.y > 0.0f) //Colisão embaixo
 		velocidade.y = 0.0f;
-	}
-
-	//if ((direcao.y < 0.0f) && (direcao.x == 0.0f))
-	//{
-	//	//Colisão embaixo
-	//	velocidade.y = 0.0f;
-	//	row = 0;
-	//}
-
 }

@@ -103,6 +103,7 @@ bool Colisor::CheckPlayerCollision(Colisor* other, sf::Vector2f& direcao, float 
 
 				direcao.x = 1.0f; //direcao->x = 1.0f;
 				direcao.y = 0.0f; //direcao->y = 0.0f;
+				
 			}
 			else
 			{
@@ -126,7 +127,7 @@ bool Colisor::CheckPlayerCollision(Colisor* other, sf::Vector2f& direcao, float 
 				direcao.x = 0.0f; //direcao->x = 0.0f;
 				direcao.y = -1.0f; //direcao->y = 0.0f;
 								   //direcao.y = -1.0f; //direcao->y = 0.0f;
-				printf("esse caso\n");
+				
 			}
 			else //embaixo
 			{

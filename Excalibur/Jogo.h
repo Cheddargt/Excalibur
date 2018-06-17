@@ -37,6 +37,7 @@ private:
 	sf::Clock clock;
 	float deltaTime;
 	bool two_players;
+	/*bool *twoplayers;*/
 	/*sf::RenderWindow window(sf::VideoMode(512, 512), "Excalibur", sf::Style::Close | sf::Style::Resize);
 	Menu menu(window.getSize().x, window.getSize().y);
 	sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));*/

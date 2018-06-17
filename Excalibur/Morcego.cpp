@@ -126,12 +126,12 @@ void Morcego::Draw(sf::RenderWindow& window)
 
 void Morcego::OnCollision(sf::Vector2f direcao)
 {
-	if (direcao.x < 0.0f)		//Colisão à esquerda
+	if (direcao.x < 0.0f)		//Colisão à direita
 	{
 
 		velocidade.x = 0.0f;
 		moveRight = false;
-		printf("colidiu\n");
+		printf("colidiu esq\n");
 		tempoEsquerda = relogio2.restart().asSeconds();
 	}
 
@@ -140,7 +140,7 @@ void Morcego::OnCollision(sf::Vector2f direcao)
 
 		velocidade.x = 0.0f;
 		moveRight = true;
-		printf("colidiu\n");
+		printf("colidiu dir\n");
 		tempoEsquerda = relogio2.restart().asSeconds();
 	}
 
@@ -162,37 +162,51 @@ void Morcego::OnCollision(sf::Vector2f direcao)
 
 void Morcego::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
-	if (direcao.x < 0.0f) //Colisão à esquerda
-	{
-		velocidade.x = -(KNOCKBACK_X);
-		moveRight = true;
-		printf("colidiu\n");
-		printf("colidiu\n");
-		tempoEsquerda = relogio2.restart().asSeconds();
-	}
+	//if (direcao.x < 0.0f) //Colisão à direita
+	//{
+	//	velocidade.x = 0.0f;
+	//	moveRight = false;
+	//	/*tempoEsquerda = relogio2.restart().asSeconds();*/
 
-	else if (direcao.x > 0.0f)
-	{
-		//Colisão na direita
-		velocidade.y = -(KNOCKBACK_Y);
-		velocidade.x = -(KNOCKBACK_X);
-		moveRight = false;
-		tempoEsquerda = relogio2.restart().asSeconds();
-	}
+	//	//if dano -> knockback
+	//}
 
-	if (direcao.y < 0.0f) //Colisão embaixo
-	{
-		velocidade.y = -(KNOCKBACK_Y);
-	}
-	else if (direcao.y > 0.0f) //colisão em cima
-	{
-		moveUp = false;
+	//else if (direcao.x > 0.0f) //Colisão à esquerda
+	//{
+	//	velocidade.x = 0.0f;
+	//	moveRight = true;
+	//	/*tempoEsquerda = relogio2.restart().asSeconds();*/
 
-		velocidade.y = (KNOCKBACK_Y);
-		if (faceRight)
-			velocidade.x = -(KNOCKBACK_X);
-		else
-			velocidade.x = (KNOCKBACK_X);
-	}
+	//	//if dano -> knockback
+	//}
+
+	//if (direcao.y < 0.0f) //Colisão embaixo
+	//{
+	//	velocidade.y = 0.0f;
+	//	moveUp = true;
+	//}
+	//else if (direcao.y > 0.0f) //colisão em cima
+	//{
+	//	velocidade.y = 0.0f;
+	//	moveUp = false;
+
+	//}
+
+	//if (direcao.x < 0.0f)  //Colisão na direita
+	//{
+	//	velocidade.x = 0.0f;
+	//	moveRight = false;
+	//}
+
+	//else if (direcao.x > 0.0f) //Colisão na esquerda
+	//{
+	//	velocidade.x = 0.0f;
+	//	moveRight = true;
+	//}
+
+	//if (direcao.y < 0.0f) ////Colisão em cima
+	//	velocidade.y = 0.0f;
+	//else if (direcao.y > 0.0f) //Colisão embaixo
+	//	velocidade.y = 0.0f;
 
 }
