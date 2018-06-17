@@ -26,10 +26,17 @@ public:
 	/*void setWindow () { }*/
 
 private:
+	Menu *menu;
+	sf::View view;
+	sf::RenderWindow window;
+	Jogador* player;
+	Jogador* player2;
 	sf::Texture playerTexture;
+	sf::Texture player2Texture;
 	Fase1 fase01;
 	sf::Clock clock;
 	float deltaTime;
+	bool two_players;
 	/*sf::RenderWindow window(sf::VideoMode(512, 512), "Excalibur", sf::Style::Close | sf::Style::Resize);
 	Menu menu(window.getSize().x, window.getSize().y);
 	sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));*/

@@ -8,10 +8,11 @@ class Fase1 :
 public:
 	Fase1();
 	~Fase1();
-	void Executar(Jogador& player, sf::RenderWindow& window, sf::View& view);
-	void ResizeView(const sf::RenderWindow& window, sf::View& view);
+	void Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers);
+	void ResizeView(const sf::RenderWindow& window, sf::View& view); //verificar
 
 private:
+	bool *twoplayers;
 	sf::Texture chaoTexture;
 	sf::Texture gosmaTexture;
 	sf::Texture morcegoTexture;

@@ -153,7 +153,7 @@ void Morcego::OnCollision(sf::Vector2f direcao)
 	}
 	else if (direcao.y > 0.0f)		//Colisão em cima
 	{
-
+		moveUp = false;
 		velocidade.y = 0.0f;
 		//printf("vida morcego: %d\n", getVida());
 		tempoDescida = relogio1.restart().asSeconds();
@@ -166,7 +166,8 @@ void Morcego::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 	{
 		velocidade.x = -(KNOCKBACK_X);
 		moveRight = true;
-		//printf("colidiu\n");
+		printf("colidiu\n");
+		printf("colidiu\n");
 		tempoEsquerda = relogio2.restart().asSeconds();
 	}
 
@@ -175,6 +176,8 @@ void Morcego::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 		//Colisão na direita
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = -(KNOCKBACK_X);
+		moveRight = false;
+		tempoEsquerda = relogio2.restart().asSeconds();
 	}
 
 	if (direcao.y < 0.0f) //Colisão embaixo
@@ -183,6 +186,8 @@ void Morcego::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 	}
 	else if (direcao.y > 0.0f) //colisão em cima
 	{
+		moveUp = false;
+
 		velocidade.y = (KNOCKBACK_Y);
 		if (faceRight)
 			velocidade.x = -(KNOCKBACK_X);

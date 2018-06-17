@@ -10,6 +10,7 @@ public:
 	Jogador(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id, float jumpHeight);
 	~Jogador();
 
+	void playerUpdate(float deltaTime, bool* twoplayers);
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow &window);
 	void OnCollision(sf::Vector2f direcao);
@@ -19,6 +20,7 @@ public:
 	Colisor GetCollider() { return Colisor(body); }
 
 private:
+	bool* twoplayers;
 	bool canJump;
 	bool isJumping;
 	float jumpHeight; //200.f

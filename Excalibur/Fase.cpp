@@ -3,7 +3,7 @@
 
 Fase::Fase()
 {
-	void Executar(Jogador& player, sf::RenderWindow& window, sf::View& view);
+	void Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers);
 	void ResizeView(const sf::RenderWindow& window, sf::View& view);
 }
 

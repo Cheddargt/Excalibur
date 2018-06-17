@@ -1,17 +1,30 @@
 #include "stdafx.h"
 #include "Jogo.h"
-#
 
-Jogo::Jogo()
+
+
+Jogo::Jogo() : 
+window(sf::VideoMode(512, 512), "Excalibur", sf::Style::Close | sf::Style::Resize),
+view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT))
 {
-
-	deltaTime = 0.0f;
+	playerTexture.loadFromFile("tux_menino.png"); //verificar
+	player2Texture.loadFromFile("tux_menina.png");
+	player = new Jogador(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 0, 200.f); //speed = 100.0f
+	player2 = new Jogador(&player2Texture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 1, 200.f);
 	//textura, linhas x colunas animação, animação swaptime, speed, health, ataque, id, jumpHeight
+	menu = new Menu(window.getSize().x, window.getSize().y);
+	/*menu(window.getSize().x, window.getSize().y);*/
+	deltaTime = 0.0f;
+	two_players = true;
+	
+
+	
 }
 
 
-Jogo::~Jogo()
+Jogo::~Jogo() //inicializar variaveis
 {
+	
 }
 
 void Jogo::ResizeView(const sf::RenderWindow& window, sf::View& view) //Para reajustar a janela
@@ -22,20 +35,11 @@ void Jogo::ResizeView(const sf::RenderWindow& window, sf::View& view) //Para rea
 
 void Jogo::Executar()
 {
-
-	playerTexture.loadFromFile("tux_from_linux.png");
-
-	sf::RenderWindow window(sf::VideoMode(512, 512), "Excalibur", sf::Style::Close | sf::Style::Resize);
-
-	Menu menu(window.getSize().x, window.getSize().y);
-
-	sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
-
-	Jogador player(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 0, 200.f);
-
-	
-	; //header
-
+	//playerTexture.loadFromFile("tux_menino.png");
+	//sf::RenderWindow window(sf::VideoMode(512, 512), "Excalibur", sf::Style::Close | sf::Style::Resize); //verificar onde fica
+	//Menu menu(window.getSize().x, window.getSize().y); //verificar onde fica
+	//sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
+	//Jogador player(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 0, 200.f);
 
 	while (window.isOpen())
 	{
@@ -61,7 +65,7 @@ void Jogo::Executar()
 
 		}
 		
-		fase01.Executar(player, window, view); //& = player.funcao na fase e * = player->funcao
+		fase01.Executar(*player, *player2, window, view, &two_players); //& = player.funcao na fase e * = player->funcao
 
 	}
 	

@@ -12,17 +12,22 @@ Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTim
 	row = 0;
 	faceRight = true;
 
+
 	body.setSize(sf::Vector2f(100.0f, 150.0f));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setPosition(100.0f, 200.0f);
 	//body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
 	//body.setPosition(1575.0f, 200.0); //(100.0f, 200.0f) 
-	//body.setPosition(1275.0f, 375.0f); //(100.0f, 200.0f) //gosma
+	//body.setPosition(1375.0f, 375.0f); //(100.0f, 200.0f) //gosma
 
 	body.setTexture(texture);
 }
 
+void Jogador::Update(float deltaTime)
+{
+
+}
 
 Jogador::~Jogador()
 {
@@ -30,41 +35,73 @@ Jogador::~Jogador()
 
 
 
-void Jogador::Update(float deltaTime)
+void Jogador::playerUpdate(float deltaTime, bool* twoplayers)
 {
+
+
 	velocidade.x *= 0.5f;
 
-	if (velocidade.y > 0.0f) //remover bug do pulo no ar
+	if (id == 0)
 	{
-		switchTime = 0.3f;
-		canJump = false;
-		isJumping = true; 
+		if (velocidade.y > 0.0f) //remover bug do pulo no ar
+		{
+			switchTime = 0.3f;
+			canJump = false;
+			isJumping = true; 
 
-		if ((row != 1) && (row != 3))
-			row = 5;
-	}
+			if ((row != 1) && (row != 3))
+				row = 5;
+		}
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		velocidade.x -= speed;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		velocidade.x += speed;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			velocidade.x -= speed;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			velocidade.x += speed;
 
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && (canJump) && !(isJumping))
-	{
-		switchTime = JUMP_SWITCHTIME; //para o pulo
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && (canJump) && !(isJumping))
+		{
+			switchTime = JUMP_SWITCHTIME; //para o pulo
 
-		if ((row != 2) && (row !=3))
-			row = 2;
+			if ((row != 2) && (row !=3))
+				row = 2;
 
-		isJumping = true;
-		canJump = false;
+			isJumping = true;
+			canJump = false;
 
-		velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight); //gravidade 9.81 -> 100 unidades sfml = 1 metro
-														   //sinal negativo -> sfml invertido no eixo Y
-														   //squareroot (2.0f * gravity * jumpHeight);
-														   //V(2gh) -> torricelli
+			velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight); //gravidade 9.81 -> 100 unidades sfml = 1 metro
+															   //sinal negativo -> sfml invertido no eixo Y
+															   //squareroot (2.0f * gravity * jumpHeight);
+															   //V(2gh) -> torricelli
 
+		}
 	}
+
+	if (id == 1)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			velocidade.x -= speed;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			velocidade.x += speed;
+
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && (canJump) && !(isJumping))
+		{
+			switchTime = JUMP_SWITCHTIME; //para o pulo
+
+			if ((row != 2) && (row != 3))
+				row = 2;
+
+			isJumping = true;
+			canJump = false;
+
+			velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight); //gravidade 9.81 -> 100 unidades sfml = 1 metro
+															   //sinal negativo -> sfml invertido no eixo Y
+															   //squareroot (2.0f * gravity * jumpHeight);
+															   //V(2gh) -> torricelli
+
+
+		}
+	}
+
 
 	velocidade.y += 981.0f * deltaTime; //gravidade
 
@@ -93,10 +130,20 @@ void Jogador::Update(float deltaTime)
 		faceRight = true;
 	else if ((velocidade.x < 0.0f) && (row != 3))
 		faceRight = false;
+	if ((this->id == 0))
+	{
+		animacao.Update(row, deltaTime, faceRight);
+		body.setTextureRect(animacao.uvRect);
+		body.move(velocidade * deltaTime); //move não ser mais frame-específico
+	}
 
-	animacao.Update(row, deltaTime, faceRight);
-	body.setTextureRect(animacao.uvRect);
-	body.move(velocidade * deltaTime); //move não ser mais frame-específico
+	if ((this->id == 1) && (twoplayers))
+	{
+		animacao.Update(row, deltaTime, faceRight);
+		body.setTextureRect(animacao.uvRect);
+		body.move(velocidade * deltaTime); //move não ser mais frame-específico
+	}
+	
 }
 
 void Jogador::Draw(sf::RenderWindow& window)

@@ -12,8 +12,8 @@ class Fase
 public:
 	Fase();
 	~Fase();
-	virtual void Executar(Jogador& player, sf::RenderWindow& window, sf::View& view) = 0;
-	void ResizeView(const sf::RenderWindow& window, sf::View& view);
+	virtual void Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers) = 0;
+	void ResizeView(const sf::RenderWindow& window, sf::View& view); //verificar
 
 protected:
 	sf::Texture backgroundTexture;

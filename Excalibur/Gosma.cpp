@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Gosma.h"
-
+#define KNOCKBACK_X 450
+#define KNOCKBACK_Y 320
 
 Gosma::Gosma(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id) :
 	Inimigo (texture, imageCount, switchTime, speed, health, attack, id)
@@ -100,38 +101,33 @@ void Gosma::OnCollision(sf::Vector2f direcao)
 
 void Gosma::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
-	//if (direcao.x < 0.0f)
-	//{
-	//	//Colisão na esquerda
-	//	if (velocidade.x)
-	//	{
-	//		velocidade.x = -(jumpHeight / 3);
-	//	}
+	if (direcao.x < 0.0f)
+	{
+		//Colisão na esquerda
+		velocidade.x = 0.0f;
+	}
 
+	else if (direcao.x > 0.0f)
+	{
+		//Colisão na direita
+		velocidade.x = 0.0f;
+	}
 
-	//}
+	if (direcao.y < 0.0f)
+	{
+		//Colisão embaixo
+		velocidade.y = 0.0f;
+	}
+	else if (direcao.y > 0.0f)
+	{
+		////Colisão em cima
+		velocidade.y = 0.0f;
+	}
 
-	//else if (direcao.x > 0.0f)
-	//{
-	//	//Colisão na direita
-	//	velocidade.x = (jumpHeight / 3);
-	//}
-
-	//if (direcao.y < 0.0f)
-	//{
-	//	//Colisão embaixo
-	//	velocidade.y = -(jumpHeight / 3);
-	//}
-	//else if (direcao.y > 0.0f)
-	//{
-	//	////Colisão em cima
-	//	//velocidade.y = 0.0f;
-	//}
-
-	//if ((direcao.y < 0.0f) && (direcao.x == 0.0f)) //remover bug do pulo
+	//if ((direcao.y < 0.0f) && (direcao.x == 0.0f))
 	//{
 	//	//Colisão embaixo
-	//	velocidade.y = -(jumpHeight / 3);
+	//	velocidade.y = 0.0f;
 	//	row = 0;
 	//}
 
