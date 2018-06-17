@@ -7,7 +7,7 @@
 class Jogador : public Personagem
 {
 public:
-	Jogador(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id, float jumpHeight);
+	Jogador(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id, float jumpHeight, int fase);
 	~Jogador();
 
 	void playerUpdate(float deltaTime, bool* twoplayers);

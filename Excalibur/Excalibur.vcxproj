@@ -154,8 +154,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animacao.h" />
+    <ClInclude Include="Chefao.h" />
+    <ClInclude Include="Esqueleto.h" />
     <ClInclude Include="Fase.h" />
     <ClInclude Include="Fase1.h" />
+    <ClInclude Include="Fase2.h" />
     <ClInclude Include="Gosma.h" />
     <ClInclude Include="Inimigo.h" />
     <ClInclude Include="Jogo.h" />
@@ -170,8 +173,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animacao.cpp" />
+    <ClCompile Include="Chefao.cpp" />
+    <ClCompile Include="Esqueleto.cpp" />
     <ClCompile Include="Fase.cpp" />
     <ClCompile Include="Fase1.cpp" />
+    <ClCompile Include="Fase2.cpp" />
     <ClCompile Include="Gosma.cpp" />
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Jogo.cpp" />

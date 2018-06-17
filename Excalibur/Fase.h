@@ -2,10 +2,13 @@
 #include <SFML/Graphics.hpp>
 #include "Gosma.h"
 #include "Morcego.h"
+#include "Esqueleto.h"
+#include "Chefao.h"
 #include "Objeto.h"
 #include "Jogador.h"
 #include <iostream>
 #include <vector>
+using namespace std;
 
 class Fase
 {
@@ -16,6 +19,7 @@ public:
 	void ResizeView(const sf::RenderWindow& window, sf::View& view); //verificar
 
 protected:
+	sf::Texture plataforma;
 	sf::Texture backgroundTexture;
 	sf::Texture plataformaTexture;
 	sf::Sprite background;

@@ -131,7 +131,6 @@ void Morcego::OnCollision(sf::Vector2f direcao)
 
 		velocidade.x = 0.0f;
 		moveRight = false;
-		printf("colidiu esq\n");
 		tempoEsquerda = relogio2.restart().asSeconds();
 	}
 
@@ -140,7 +139,6 @@ void Morcego::OnCollision(sf::Vector2f direcao)
 
 		velocidade.x = 0.0f;
 		moveRight = true;
-		printf("colidiu dir\n");
 		tempoEsquerda = relogio2.restart().asSeconds();
 	}
 
@@ -155,42 +153,41 @@ void Morcego::OnCollision(sf::Vector2f direcao)
 	{
 		moveUp = false;
 		velocidade.y = 0.0f;
-		//printf("vida morcego: %d\n", getVida());
 		tempoDescida = relogio1.restart().asSeconds();
 	}
 }
 
 void Morcego::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
-	//if (direcao.x < 0.0f) //Colisão à direita
-	//{
-	//	velocidade.x = 0.0f;
-	//	moveRight = false;
-	//	/*tempoEsquerda = relogio2.restart().asSeconds();*/
+	if (direcao.x < 0.0f) //Colisão à direita
+	{
+		velocidade.x = 0.0f;
+		moveRight = false;
+		/*tempoEsquerda = relogio2.restart().asSeconds();*/
 
-	//	//if dano -> knockback
-	//}
+		//if dano -> knockback
+	}
 
-	//else if (direcao.x > 0.0f) //Colisão à esquerda
-	//{
-	//	velocidade.x = 0.0f;
-	//	moveRight = true;
-	//	/*tempoEsquerda = relogio2.restart().asSeconds();*/
+	else if (direcao.x > 0.0f) //Colisão à esquerda
+	{
+		velocidade.x = 0.0f;
+		moveRight = true;
+		/*tempoEsquerda = relogio2.restart().asSeconds();*/
 
-	//	//if dano -> knockback
-	//}
+		//if dano -> knockback
+	}
 
-	//if (direcao.y < 0.0f) //Colisão embaixo
-	//{
-	//	velocidade.y = 0.0f;
-	//	moveUp = true;
-	//}
-	//else if (direcao.y > 0.0f) //colisão em cima
-	//{
-	//	velocidade.y = 0.0f;
-	//	moveUp = false;
+	if (direcao.y < 0.0f) //Colisão embaixo
+	{
+		velocidade.y = 0.0f;
+		moveUp = true;
+	}
+	else if (direcao.y > 0.0f) //colisão em cima
+	{
+		velocidade.y = 0.0f;
+		moveUp = false;
 
-	//}
+	}
 
 	//if (direcao.x < 0.0f)  //Colisão na direita
 	//{

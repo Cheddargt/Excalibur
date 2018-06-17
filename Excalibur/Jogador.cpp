@@ -5,7 +5,7 @@
 #define KNOCKBACK_Y 320
 #define JUMP_SWITCHTIME 0.6f
 
-Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id, float jumpHeight) :
+Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id, float jumpHeight, int fase) :
 	Personagem(texture, imageCount, switchTime, speed, health, attack, id), jumpHeight(jumpHeight)
 
 {
@@ -16,22 +16,25 @@ Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTim
 
 	body.setSize(sf::Vector2f(100.0f, 150.0f));
 	body.setOrigin(body.getSize() / 2.0f);
-	
-	if (this->id == 1)
+	if (fase == 1)
 	{
-		body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
-		/*body.setPosition(40.0f, 200.0f);*/
-	}
-	else if (this->id == 0)
-	{
-		body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
-		/*body.setPosition(100.0f, 200.0f);*/
-	}
+		if (this->id == 1)
+		{
+			body.setPosition(100.0f, 200.0f); //(100.0f, 200.0f) //gosma
+											   /*body.setPosition(40.0f, 200.0f);*/
+		}
+		else if (this->id == 0) 
+		{
+			body.setPosition(50.0f, 200.0); //(50.0f, 200.0f)  //(100.0f, 200.0f) //gosma
+											   /*body.setPosition(100.0f, 200.0f);*/
+		}
 
+
+		//body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
+		//body.setPosition(1575.0f, 200.0); //(100.0f, 200.0f) 
+		//body.setPosition(1375.0f, 375.0f); //(100.0f, 200.0f) //gosma
+	}
 	
-	//body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
-	//body.setPosition(1575.0f, 200.0); //(100.0f, 200.0f) 
-	//body.setPosition(1375.0f, 375.0f); //(100.0f, 200.0f) //gosma
 
 	body.setTexture(texture);
 }

@@ -66,38 +66,38 @@ void Gosma::OnCollision(sf::Vector2f direcao)
 {
 	if (direcao.x < 0.0f) //Colisão à direita
 	{ 
-		velocidade.x = 0.0f;
-		moveRight = false;
+		this->velocidade.x = 0.0f;
+		this->moveRight = false;
 	}
 
 	else if (direcao.x > 0.0f) //Colisão à esquerda
 	{
-		velocidade.x = 0.0f;
-		moveRight = true;
+		this->velocidade.x = 0.0f;
+		this->moveRight = true;
 	}
 
 	if (direcao.y < 0.0f) //Colisão embaixo
-		velocidade.y = 0.0f;
+		this->velocidade.y = 0.0f;
 	else if (direcao.y > 0.0f) //Colisão em cima
-		velocidade.y = 0.0f;
+		this->velocidade.y = 0.0f;
 }
 
 void Gosma::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
 	if (direcao.x < 0.0f)  //Colisão na direita
 	{
-		velocidade.x = 0.0f;
-		moveRight = false;
+		this->velocidade.x = 0.0f;
+		this->moveRight = false;
 	}
 
 	else if (direcao.x > 0.0f) //Colisão na esquerda
 	{
-		velocidade.x = 0.0f;
-		moveRight = true;
+		this->velocidade.x = 0.0f;
+		this->moveRight = true;
 	}
 
 	if (direcao.y < 0.0f) ////Colisão em cima
-		velocidade.y = 0.0f;
+		this->velocidade.y = 0.0f;
 	else if (direcao.y > 0.0f) //Colisão embaixo
-		velocidade.y = 0.0f;
+		this->velocidade.y = 0.0f;
 }
