@@ -15,11 +15,11 @@ public:
 	virtual void Draw(sf::RenderWindow &window) = 0;
 	virtual void OnCollision(sf::Vector2f direcao) = 0;
 	void setVida(int x) { health -= x; }
-	int getVida() { return health; }
+	const int getVida() { return health; }
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	Colisor GetCollider() { return Colisor(body); }
 
-private:
+protected:
 
 
 };

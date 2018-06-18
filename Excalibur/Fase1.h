@@ -16,7 +16,8 @@ private:
 	sf::Texture chaoTexture;
 	sf::Texture gosmaTexture;
 	sf::Texture morcegoTexture;
-	std::vector<Objeto> plataformas;
+	sf::Texture pedraTexture;
+	std::vector<Item> plataformas;
 
 };
 

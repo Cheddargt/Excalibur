@@ -15,6 +15,8 @@ public:
 	void Draw(sf::RenderWindow &window);
 	void OnCollision(sf::Vector2f direcao);
 	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
+	void ColidiuObstaculo(sf::Vector2f direcao, int dano);
+	const void setFase(int fase) { this->fase = fase; }
 
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	Colisor GetCollider() { return Colisor(body); }
@@ -24,6 +26,7 @@ private:
 	bool canJump;
 	bool isJumping;
 	float jumpHeight; //200.f
+	int fase;
 
 
 };

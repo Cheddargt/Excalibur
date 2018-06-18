@@ -11,7 +11,7 @@ Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTim
 {
 	row = 0;
 	faceRight = true;
-
+	std::cout << fase << std::endl;
 	
 
 	body.setSize(sf::Vector2f(100.0f, 150.0f));
@@ -20,20 +20,37 @@ Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTim
 	{
 		if (this->id == 1)
 		{
-			body.setPosition(100.0f, 200.0f); //(100.0f, 200.0f) //gosma
-											   /*body.setPosition(40.0f, 200.0f);*/
+			body.setPosition(100.0f, 200.0f); //(100.0f, 200.0f) 
 		}
-		else if (this->id == 0) 
+		else if (this->id == 0)
 		{
-			body.setPosition(50.0f, 200.0); //(50.0f, 200.0f)  //(100.0f, 200.0f) //gosma
-											   /*body.setPosition(100.0f, 200.0f);*/
+			body.setPosition(50.0f, 200.0);
 		}
-
 
 		//body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
 		//body.setPosition(1575.0f, 200.0); //(100.0f, 200.0f) 
 		//body.setPosition(1375.0f, 375.0f); //(100.0f, 200.0f) //gosma
 	}
+
+	////ACHO QUE NAO PRECISA
+	////////////////else if (fase == 2)
+	////////////////{
+	////////////////	if (this->id == 1)
+	////////////////	{
+	////////////////		body.setPosition(50.0f, -120.0f);	 //(100.0f, 200.0f) //gosma
+	////////////////										  /*body.setPosition(40.0f, 200.0f);*/
+	////////////////	}
+	////////////////	else if (this->id == 0)
+	////////////////	{
+	////////////////		body.setPosition(50.0f, -120.0f);	 //(50.0f, 200.0f)  //(100.0f, 200.0f) //gosma
+	////////////////										/*body.setPosition(100.0f, 200.0f);*/
+	////////////////	}
+
+
+	////////////////	//body.setPosition(3200.0f, 200.0f); //(100.0f, 200.0f) //morcego
+	////////////////	//body.setPosition(1575.0f, 200.0); //(100.0f, 200.0f) 
+	////////////////	//body.setPosition(1375.0f, 375.0f); //(100.0f, 200.0f) //gosma
+	////////////////}
 	
 
 	body.setTexture(texture);
@@ -55,7 +72,7 @@ void Jogador::playerUpdate(float deltaTime, bool* twoplayers)
 
 	this->twoplayers = twoplayers; //ok
 
-	std::cout << *twoplayers << std::endl;
+	/*td::cout << *twoplayers << std::endl;*/
 
 	velocidade.x *= 0.5f;
 
@@ -223,6 +240,7 @@ void Jogador::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
 	if ((direcao.x < 0.0f) && (row != 3))  // added row != 3
 	{ //Colisão à esquerda
+
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = (KNOCKBACK_X);
 		switchTime = 0.3f;
@@ -245,7 +263,6 @@ void Jogador::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 	{
 		switchTime = JUMP_SWITCHTIME;
 
-		printf("esse caso");
 		row = 2;
 		velocidade.y = -sqrtf(2.0f * 981.0f * jumpHeight);
 		isJumping = true;
@@ -269,6 +286,54 @@ void Jogador::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 
 			switchTime = 0.3f;
 			row = 3;
+
+	}
+
+}
+
+void Jogador::ColidiuObstaculo(sf::Vector2f direcao, int dano)
+{
+	if ((direcao.x < 0.0f) && (row != 3))  // added row != 3
+	{ //Colisão à esquerda
+
+		velocidade.y = -(KNOCKBACK_Y);
+		velocidade.x = (KNOCKBACK_X);
+		switchTime = 0.3f;
+		row = 3;
+	}
+
+	else if ((direcao.x > 0.0f) && (row != 3)) //added row != 3
+	{ //Colisão na direita
+
+
+		velocidade.y = -(KNOCKBACK_Y);
+		velocidade.x = -(KNOCKBACK_X);
+		switchTime = 0.3f; //volta ao normal
+		row = 3;
+	}
+
+	if ((direcao.y < 0.0f) && (row != 3)) //Colisão embaixo //added row != 3
+	{
+		canJump = false;
+		row = 3;
+		velocidade.y = -(KNOCKBACK_Y);
+		velocidade.x = -(KNOCKBACK_X);
+		switchTime = 0.3f; //volta ao normal
+
+	}
+
+	else if ((direcao.y > 0.0f) && (row != 3)) //colisão em cima ARRUMAR
+	{
+
+		/*velocidade.y = (KNOCKBACK_Y);*/
+
+		if (faceRight)
+			velocidade.x = -(KNOCKBACK_X);
+		else
+			velocidade.x = (KNOCKBACK_X);
+
+		switchTime = 0.3f;
+		row = 3;
 
 	}
 

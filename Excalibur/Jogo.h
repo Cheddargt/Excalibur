@@ -3,16 +3,15 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-
 #include "Jogador.h"
 #include "Personagem.h"
 #include "Gosma.h"
 #include "Morcego.h"
-#include "Objeto.h"
+//#include "Item.h"
 #include "Menu.h"
 #include "Fase.h"
 #include "Fase1.h"
-
+#include "Fase2.h"
 
 #define VIEW_HEIGHT 600.0f
 
@@ -33,10 +32,13 @@ private:
 	Jogador* player2;
 	sf::Texture playerTexture;
 	sf::Texture player2Texture;
-	Fase1 fase01;
+	Fase1 *fase01;
+	Fase2 *fase02;
 	sf::Clock clock;
 	float deltaTime;
 	bool two_players;
+	sf::Event* evnt; //verificar
+
 	/*bool *twoplayers;*/
 	/*sf::RenderWindow window(sf::VideoMode(512, 512), "Excalibur", sf::Style::Close | sf::Style::Resize);
 	Menu menu(window.getSize().x, window.getSize().y);

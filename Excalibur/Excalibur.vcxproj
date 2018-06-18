@@ -163,11 +163,12 @@
     <ClInclude Include="Inimigo.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Morcego.h" />
+    <ClInclude Include="Obstaculo.h" />
     <ClInclude Include="Personagem.h" />
     <ClInclude Include="Colisor.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="Objeto.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -182,12 +183,13 @@
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="Morcego.cpp" />
+    <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Colisor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Objeto.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
