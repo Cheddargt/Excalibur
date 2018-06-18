@@ -18,6 +18,7 @@ public:
 	const int getVida() { return health; }
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	Colisor GetCollider() { return Colisor(body); }
+	
 
 protected:
 

@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Jogo.h"
 
-
+//classe plataforma derivada de item
+//delete vector
 
 Jogo::Jogo() : 
 window(sf::VideoMode(512, 512), "Excalibur", sf::Style::Close | sf::Style::Resize),
@@ -12,11 +13,10 @@ view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT))
 	evnt = new sf::Event; //verificar
 	playerTexture.loadFromFile("tux_menino.png");
 	player2Texture.loadFromFile("tux_menina.png");
-	player = new Jogador(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 0, 200.f, 1); //speed = 100.0f
-	player2 = new Jogador(&player2Texture, sf::Vector2u(3, 9), 0.3f, 100.0f, 3, 1, 1, 200.f, 1);
+	player = new Jogador(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 5, 1, 0, 200.f, 1); //speed = 100.0f
+	player2 = new Jogador(&player2Texture, sf::Vector2u(3, 9), 0.3f, 100.0f, 5, 1, 1, 200.f, 1);
 	fase01 = new Fase1; //verificar
 	fase02 = new Fase2; //verificar
-	/*menu(window.getSize().x, window.getSize().y);*/
 	deltaTime = 0.0f;
 	two_players = false;
 	std::cout << two_players << std::endl;
@@ -28,6 +28,8 @@ Jogo::~Jogo()
 {
 	delete fase01; //verificar
 	delete fase02; 
+
+
 }
 
 void Jogo::ResizeView(const sf::RenderWindow& window, sf::View& view) //Para reajustar a janela
@@ -68,7 +70,7 @@ void Jogo::Executar()
 		player->setFase(1); // p/ o menu
 		player2->setFase(1); //p/ o menu
 
-		//fase02.Executar(*player, *player2, window, view, &two_players);
+		//fase02->Executar(*player, *player2, window, view, &two_players);
 		//player->setFase(2); // p/ o menu
 		//player2->setFase(2); //p/ o menu
 

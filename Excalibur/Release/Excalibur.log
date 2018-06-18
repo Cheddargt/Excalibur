@@ -1,7 +1,12 @@
 ﻿  Fase1.cpp
+  Fase2.cpp
+  Jogo.cpp
+c:\users\lenovo t430\lenovo-t430 salvar\utfpr\prog2\excalibur\excalibur\jogo.cpp(12): warning C4244: 'argumento': conversão de 'unsigned int' para 'float', possível perda de dados
+  Obstaculo.cpp
+  main.cpp
   Gerando código
-  22 of 312 functions ( 7.1%) were compiled, the rest were copied from previous compilation.
+  37 of 510 functions ( 7.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    39 functions had inline decision re-evaluated but remain unchanged
+    36 functions had inline decision re-evaluated but remain unchanged
   Finalizada a geração de código
   Excalibur.vcxproj -> C:\Users\Lenovo T430\Lenovo-T430 Salvar\UTFPR\Prog2\Excalibur\Release\Excalibur.exe

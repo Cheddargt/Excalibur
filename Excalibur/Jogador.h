@@ -16,7 +16,9 @@ public:
 	void OnCollision(sf::Vector2f direcao);
 	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
 	void ColidiuObstaculo(sf::Vector2f direcao, int dano);
-	const void setFase(int fase) { this->fase = fase; }
+	void setFase(int fase) { this->fase = fase; }
+	int getHealth() { return health; }
+	void setHealth(int dano) { health -= dano; }
 
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	Colisor GetCollider() { return Colisor(body); }

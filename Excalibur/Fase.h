@@ -8,6 +8,7 @@
 #include "Jogador.h"
 #include <iostream>
 #include <vector>
+#include <time.h>
 using namespace std;
 
 class Fase
@@ -18,12 +19,12 @@ public:
 	virtual void Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers) = 0;
 	void ResizeView(const sf::RenderWindow& window, sf::View& view); //verificar
 
-protected:sf::Sprite background;
+protected:
+	sf::Sprite background;
 	sf::Texture plataforma;
 	sf::Texture backgroundTexture;
 	sf::Texture background2Texture;
 	sf::Texture plataformaTexture;
-	/*sf::Sprite background2;*/
 	sf::Vector2f direcao; //passada pra OnCollision e pra player OnCollision
 	
 };

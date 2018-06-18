@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Fase1.h"
 #define VIEW_HEIGHT 600.0f
+#include <iostream>
 
 Fase1::Fase1()
 {
@@ -8,10 +9,29 @@ Fase1::Fase1()
 	/*std::cout << twoplayers << std::endl;*/
 	void ResizeView(const sf::RenderWindow& window, sf::View& view);
 	
+	srand((unsigned)time(NULL));
+	num_gosmas = ((rand() % 10) + 1);
+	num_morcegos = ((rand() % 5) + 1);
+
+	
+	chaoTexture.loadFromFile("plataforma.png");
+	gosmaTexture.loadFromFile("gosma.png");
+	morcegoTexture.loadFromFile("morcego.png");
+	pedraTexture.loadFromFile("pedra.png");
+	backgroundTexture.loadFromFile("background_fase01.png");
+	plataformaTexture.loadFromFile("plataforma.png");
+	chaoTexture.isRepeated();
+
+	background.setScale(1.5f, 1.0f);
+	background.setOrigin(000.0f, 750.0f);
+	background.setTexture(backgroundTexture);
+
+	evnt = new sf::Event;
 }
 
 Fase1::~Fase1()
 {
+	delete evnt;
 }
 
 void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers)
@@ -22,28 +42,23 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 	if (*twoplayers)
 		player2.SetPosition(50.0f, 200.0);
 
-	backgroundTexture.loadFromFile("background_fase01.png");
-	plataformaTexture.loadFromFile("plataforma.png");
 
-	background.setScale(1.5f, 1.0f);
-	background.setOrigin(000.0f, 750.0f);
-	background.setTexture(backgroundTexture);
-	chaoTexture.loadFromFile("plataforma.png");
-	gosmaTexture.loadFromFile("gosma.png");
-	morcegoTexture.loadFromFile("morcego.png"); //morcego.png
-	pedraTexture.loadFromFile("pedra.png");
+	for (int i = 0; i < num_gosmas; i++)
+	{
+		gosmas.push_back(Gosma(&gosmaTexture, sf::Vector2u(3, 2), 0.3f, 100.0f, 3, 1, i));
+		gosmas[i].SetPosition((float) (1575.0f + (227*i)), 200.0f);
 
-	Gosma gosma(&gosmaTexture, sf::Vector2u(3, 2), 0.3f, 100.0f, 3, 1, 1);
-	Morcego morcego(&morcegoTexture, sf::Vector2u(3, 1), 0.3f, 100.0f, 3, 1, 1);
+		//(1575.0f, 200.0f) até (3850.0f, 200.0f)
+	}
 
-	//std::vector<Gosma> gosmas;
-	std::vector<Item> plataformas; //classe plataformas?
-	//std::vector<Morcego> morcegos;
+	for (int i = 0; i < num_morcegos; i++)
+	{
+		morcegos.push_back(Morcego(&morcegoTexture, sf::Vector2u(3, 1), 0.3f, 100.0f, 3, 1, i));
+		morcegos[i].SetPosition((float)(1875.0f + (210*i)), 200.0f);
 
-	//morcegos.push_back(Morcego(&morcegoTexture, sf::Vector2u(3, 1), 0.3f, 100.0f, 3, 1, 1));
-
-	//gosmas.push_back(Gosma(&gosmaTexture, sf::Vector2u(3, 2), 0.3f, 100.0f, 3, 1, 1));
-
+		//(1875.0f, 200.0f) até (3850.0f, 200.0f)
+	}
+	
 	plataformas.push_back(Item(&plataformaTexture, sf::Vector2f(50.0f, 2000.0f), sf::Vector2f(0.0f, 0.0f))); //parede inicio
 	plataformas.push_back(Item(&chaoTexture, sf::Vector2f(1000.0f, 200.0f), sf::Vector2f(500.0f, 500.0f))); //chao 1
 	plataformas.push_back(Item(&plataformaTexture, sf::Vector2f(200.0f, 200.0f), sf::Vector2f(500.0f, 310.0f))); //Pedra - obstaculo 1 sem bounce
@@ -56,8 +71,10 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 	plataformas.push_back(Item(&pedraTexture, sf::Vector2f(400.0f, 400.0f), sf::Vector2f(3750.0f, 200.0f))); //Pedra - obstaculo 3 bounce morcego
 	plataformas.push_back(Item(&pedraTexture, sf::Vector2f(200.0f, 200.0f), sf::Vector2f(3850.0f, -280.0f))); //Pedra - obstaculo final
 
-	float deltaTime = 0.0f;
-	sf::Clock clock;
+
+
+	float deltaTime = 0.0f; //verificar
+	sf::Clock clock; //verificar
 
 
 	while (window.isOpen())
@@ -66,11 +83,11 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 		if (deltaTime > 1.0f / 20.0f)
 			deltaTime = 1.0f / 20.0f;
 
-	sf::Event evnt; //verificar
+	 //verificar
 
-	while (window.pollEvent(evnt))
+	while (window.pollEvent(*evnt))
 	{
-		switch (evnt.type)
+		switch (evnt->type)
 		{
 
 		case sf::Event::Closed:
@@ -85,16 +102,15 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 	}
 
 	player.playerUpdate(deltaTime, twoplayers);
+
 	if (*twoplayers)
 		player2.playerUpdate(deltaTime, twoplayers);
 	
-	gosma.Update(deltaTime);
-	/*for (Gosma& gosma : gosmas)
-		gosma.Update(deltaTime);*/
+	for (Gosma& gosma : gosmas)
+		gosma.Update(deltaTime);
 
-	morcego.Update(deltaTime);
-	/*for (Morcego& morcego : morcegos)
-		morcego.Update(deltaTime);*/
+	for (Morcego& morcego : morcegos)
+		morcego.Update(deltaTime);
 
 	/**for (int i = 0; i < plataformas.size(); i++)
 	{
@@ -108,120 +124,95 @@ void Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 		if (plataforma.GetCollider().CheckCollision(&(player2.GetCollider()), direcao, 1.0f))
 			player2.OnCollision(direcao);
 
-		if (plataforma.GetCollider().CheckCollision(&(gosma.GetCollider()), direcao, 1.0f))
-			gosma.OnCollision(direcao);
-
-		/*for (Gosma& gosma : gosmas)
+		for (Gosma& gosma : gosmas)
 			if (plataforma.GetCollider().CheckCollision(&(gosma.GetCollider()), direcao, 1.0f))
-			{
 				gosma.OnCollision(direcao);
-				gosma.Update(deltaTime);
-			}*/
 				
-
-
-		if (plataforma.GetCollider().CheckCollision(&(morcego.GetCollider()), direcao, 1.0f))
-			morcego.OnCollision(direcao);
-		/*for (Morcego& morcego : morcegos)
+		for (Morcego& morcego : morcegos)
 			if (plataforma.GetCollider().CheckCollision(&(morcego.GetCollider()), direcao, 1.0f))
 				morcego.OnCollision(direcao);
-		*/
 	}
 
-	if (player.GetCollider().CheckPlayerCollision(&(morcego.GetCollider()), direcao, 1.0f)) //mudei pra check player collision
+	for (Morcego& morcego : morcegos)
 	{
-		player.ColidiuPersonagem(direcao, morcego.getAttack());
-		morcego.ColidiuPersonagem(direcao, player.getAttack());
+		if (player.GetCollider().CheckPlayerCollision(&(morcego.GetCollider()), direcao, 1.0f))
+		{
+			player.ColidiuPersonagem(direcao, morcego.getAttack());
+			morcego.ColidiuPersonagem(direcao, player.getAttack());
+		}
+
+		if ((player2.GetCollider().CheckPlayerCollision(&(morcego.GetCollider()), direcao, 0.5f)) && (twoplayers))
+		{
+			player2.ColidiuPersonagem(direcao, morcego.getAttack());
+			morcego.ColidiuPersonagem(direcao, player2.getAttack());
+
+		}	
 	}
-	if (player2.GetCollider().CheckPlayerCollision(&(morcego.GetCollider()), direcao, 1.0f) && (*twoplayers)) //mudei pra check player collision
-	{
-		player2.ColidiuPersonagem(direcao, morcego.getAttack());
-		morcego.ColidiuPersonagem(direcao, player2.getAttack());
-	}
-
-	//for (Morcego& morcego : morcegos)
-	//{
-	//	if (morcego.GetCollider().CheckPlayerCollision(&(player.GetCollider()), direcao, 1.0f))
-	//	{
-
-	//		player.ColidiuPersonagem(direcao, morcego.getAttack());
-	//		morcego.ColidiuPersonagem(direcao, player.getAttack());
-
-	//	}
-
-	//	if ((morcego.GetCollider().CheckCollision(&(player2.GetCollider()), direcao, 0.5f)) && (twoplayers))
-	//	{
-	//		player2.ColidiuPersonagem(direcao, morcego.getAttack());
-	//		player2.OnCollision(direcao);
-	//		morcego.ColidiuPersonagem(direcao, player.getAttack());
-
-	//	}
-	//			
-	//}
-
 	
-	//for (Gosma& gosma : gosmas)
-	//{
-	//	if (gosma.GetCollider().CheckPlayerCollision(&(player.GetCollider()), direcao, 1.0f))
-	//	{
-
-	//		player.ColidiuPersonagem(direcao, gosma.getAttack());
-	//		gosma.ColidiuPersonagem(direcao, player.getAttack());
-
-	//	}
-
-	//	if ((gosma.GetCollider().CheckCollision(&(player2.GetCollider()), direcao, 0.5f)) && (twoplayers))
-	//	{
-	//		player2.ColidiuPersonagem(direcao, gosma.getAttack());
-	//		//player2.OnCollision(direcao);
-	//		gosma.ColidiuPersonagem(direcao, player.getAttack());
-
-	//	}
-
-	//}
-
-	if (player.GetCollider().CheckPlayerCollision(&(gosma.GetCollider()), direcao, 1.0f)) //mudei pra check player collision
+	for (Gosma& gosma : gosmas)
 	{
-		/*player.OnCollision(direcao);*/
-		player.ColidiuPersonagem(direcao, gosma.getAttack());
-		gosma.ColidiuPersonagem(direcao, player.getAttack());
-		
-		/*if (gosma.getHealth() == 0)
-			 gosma;*/
+		if (player.GetCollider().CheckPlayerCollision(&(gosma.GetCollider()), direcao, 1.0f))
+		{
+			player.ColidiuPersonagem(direcao, gosma.getAttack());
+			gosma.ColidiuPersonagem(direcao, player.getAttack());
+
+		}
+
+		if ((player2.GetCollider().CheckCollision(&(gosma.GetCollider()), direcao, 0.5f)) && (twoplayers))
+		{
+			player2.ColidiuPersonagem(direcao, gosma.getAttack());
+			gosma.ColidiuPersonagem(direcao, player2.getAttack());
+
+		}
+
 	}
-
-	//if (player2.GetCollider().CheckPlayerCollision(&(gosma.GetCollider()), direcao, 1.0f)) //mudei pra check player collision
-	//{
-	//	player2.ColidiuPersonagem(direcao, gosma.getAttack());
-	//	gosma.ColidiuPersonagem(direcao, player2.getAttack());
-	//}
-
-	
-
 
 	view.setCenter(player.GetPosition()); //depois de update sempre
 
-	window.clear(sf::Color(0, 250, 154)); // RED=0, GREEN=255, BLUE=0
+	window.clear(sf::Color(0, 250, 154));
 	window.draw(background);
 	window.setView(view);
-	player.Draw(window);
+
+	if (player.getHealth() > 0)
+		player.Draw(window);
+	else //game over
+		this->Executar(player, player2, window, view, twoplayers);
+
 	if (*twoplayers)
 		player2.Draw(window);
-	gosma.Draw(window);
-	morcego.Draw(window);
+	
 
+	for (unsigned int i = 0; i < gosmas.size(); i++)
+	{
+		if (gosmas[i].getHealth() > 0)
+			gosmas[i].Draw(window);
+		else
+			gosmas.erase(gosmas.begin() + i);
+	}
+	
+	for (unsigned int i = 0; i < morcegos.size(); i++)
+	{
+		if (morcegos[i].getHealth() > 0)
+			morcegos[i].Draw(window);
+		else
+			morcegos.erase(morcegos.begin() + i);
+	}
 
-	/*for (Gosma& gosma : gosmas)
-		gosma.Draw(window);*/
+	//for (Gosma& gosma : gosmas)
+	//{
+	//	if(vida)
+	//	gosma.Draw(window);
+	//	else
+	//}
+		
 
 	for (Item& plataforma : plataformas)
 		plataforma.Draw(window);
 
-	/*for (Morcego& morcego : morcegos)
-		morcego.Draw(window);*/
+	for (Morcego& morcego : morcegos)
+		morcego.Draw(window);
 
 	window.display();
-
 
 }
 }

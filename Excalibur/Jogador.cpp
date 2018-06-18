@@ -32,7 +32,7 @@ Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTim
 		//body.setPosition(1375.0f, 375.0f); //(100.0f, 200.0f) //gosma
 	}
 
-	////ACHO QUE NAO PRECISA
+	////ACHO QUE NAO PRECISA //verificar
 	////////////////else if (fase == 2)
 	////////////////{
 	////////////////	if (this->id == 1)

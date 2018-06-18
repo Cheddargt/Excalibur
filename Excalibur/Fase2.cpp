@@ -33,7 +33,6 @@ void Fase2::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 
 	backgroundTexture.loadFromFile("background_fase02.png");
 	plataformaTexture.loadFromFile("pedra.png");
-	esqueletoTexture.loadFromFile("gosma.png");
 	caixaTexture.loadFromFile("caixa.png");
 	background.setScale(5.0f, 3.0f);
 	background.setOrigin(40.0f, 300.0f);
@@ -43,15 +42,13 @@ void Fase2::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 	chefaoTexture.loadFromFile("chefao.png"); //morcego.png
 	espinhoTexture.loadFromFile("espinhos.png");
 
-
-
-	//Esqueleto morcego(&morcegoTexture, sf::Vector2u(3, 1), 0.3f, 100.0f, 3, 1, 1);
 	Esqueleto esqueleto(&esqueletoTexture, sf::Vector2u(4, 2), 0.5f, 100.0f, 3, 1, 1);
 	Chefao chefao(&chefaoTexture, sf::Vector2u(1, 6), 0.3f, 100.0f, 3, 1, 1);
 
 
 	esqueleto.SetPosition(190.0f, -120.0f);
-	//std::vector<Gosma> gosmas;
+
+	std::vector<Esqueleto> esqueletos;
 	std::vector<Item> plataformas;
 	std::vector<Obstaculo> espinhos;
 	//std::vector<Morcego> morcegos;
@@ -140,16 +137,22 @@ void Fase2::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 	}
 
 
-	if (player.GetCollider().CheckPlayerCollision(&(esqueleto.GetCollider()), direcao, 1.0f)) //mudei pra check player collision
+	for (Esqueleto& esqueleto : esqueletos)
 	{
-		player.ColidiuPersonagem(direcao, esqueleto.getAttack());		
-		esqueleto.ColidiuPersonagem(direcao, player.getAttack());
-	}
+		if (player.GetCollider().CheckPlayerCollision(&(esqueleto.GetCollider()), direcao, 1.0f))
+		{
+			player.ColidiuPersonagem(direcao, esqueleto.getAttack());
+			esqueleto.ColidiuPersonagem(direcao, player.getAttack());
 
-	if (player2.GetCollider().CheckPlayerCollision(&(esqueleto.GetCollider()), direcao, 1.0f) && (*twoplayers)) //mudei pra check player collision
-	{
-		player2.ColidiuPersonagem(direcao, esqueleto.getAttack());
-		esqueleto.ColidiuPersonagem(direcao, player2.getAttack());
+		}
+
+		if ((player2.GetCollider().CheckCollision(&(esqueleto.GetCollider()), direcao, 0.5f)) && (twoplayers))
+		{
+			player2.ColidiuPersonagem(direcao, esqueleto.getAttack());
+			esqueleto.ColidiuPersonagem(direcao, player2.getAttack());
+
+		}
+
 	}
 
 
@@ -165,15 +168,14 @@ void Fase2::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 	chefao.Draw(window);
 
 
-	/*for (Esqueleto& esqueleto : esqueletos)
-	esqueleto.Draw(window);*/
+	for (Esqueleto& esqueleto : esqueletos)
+	esqueleto.Draw(window);
 
 	for (Item& plataforma : plataformas)
 				plataforma.Draw(window);
 
 			for (Obstaculo& espinho : espinhos)
 				espinho.Draw(window);
-
 			window.display();
 
 

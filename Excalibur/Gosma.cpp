@@ -11,9 +11,6 @@ Gosma::Gosma(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, fl
 	faceRight = false;
 	moveRight = false;
 
-	//void Update(float deltaTime);
-	//void Draw(sf::RenderWindow &window);
-	//void OnCollision(sf::Vector2f direcao);
 	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
 
 	if (this->id == 1)
@@ -33,8 +30,8 @@ Gosma::~Gosma()
 
 void Gosma::Update(float deltaTime)
 {
-	if (getHealth() > 0)
-	{
+	/*if (getHealth() > 0)
+	{*/
 
 	if (moveRight)
 		velocidade.x = speed;
@@ -53,7 +50,7 @@ void Gosma::Update(float deltaTime)
 			faceRight = true;
 		else
 			faceRight = false;
-	}
+	/*}*/
 
 	animacao.Update(row, deltaTime, faceRight);
 	body.setTextureRect(animacao.uvRect);
@@ -63,7 +60,6 @@ void Gosma::Update(float deltaTime)
 
 void Gosma::Draw(sf::RenderWindow& window)
 {
-	if (getHealth() > 0)
 		window.draw(body);
 }
 

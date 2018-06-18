@@ -1,6 +1,7 @@
 #pragma once
 #include "Fase.h"
 #include "Jogador.h"
+#include "Buraco.h"
 
 class Fase1 :
 	public Fase
@@ -18,6 +19,12 @@ private:
 	sf::Texture morcegoTexture;
 	sf::Texture pedraTexture;
 	std::vector<Item> plataformas;
+	std::vector<Gosma> gosmas;
+	std::vector<Morcego> morcegos;
+	std::vector<Obstaculo> obstaculos;
+	int num_gosmas;
+	int num_morcegos;
+	sf::Event *evnt;
 
 };
 
