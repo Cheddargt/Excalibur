@@ -5,7 +5,7 @@
 Obstaculo::Obstaculo(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position, int dano) :
 	Item (texture, size, position)
 {
-
+	this->dano = dano;
 	body.setSize(size);
 	body.setOrigin(size / 2.0f);
 	body.setTexture(texture);

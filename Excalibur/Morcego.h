@@ -13,7 +13,7 @@ public:
 	void OnCollision(sf::Vector2f direcao);
 	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
 	int getHealth() { return health; }
-	void setHealth(int dano) { health -= dano; }
+	void setVida(int dano) { health -= dano; }
 
 private:
 	bool moveRight;

@@ -29,7 +29,6 @@ Jogo::~Jogo()
 	delete fase01; //verificar
 	delete fase02; 
 
-
 }
 
 void Jogo::ResizeView(const sf::RenderWindow& window, sf::View& view) //Para reajustar a janela
@@ -65,14 +64,24 @@ void Jogo::Executar()
 
 		}
 
-		
-		fase01->Executar(*player, *player2, window, view, &two_players); //& = player.funcao na fase e * = player->funcao
-		//player->setFase(1); // p/ o menu
-		//player2->setFase(1); //p/ o menu
+		//if pessoa escolheu jogar fase1 - inicia sequencialmente
+			//player->setFase(1); // p/ o menu
+			//player2->setFase(1); //p/ o menu
+			//if (fase01->Executar(player, player2, window, view, &two_players))
+			//{
+				if(fase02->Executar(player, player2, window, view, &two_players));
+					printf("You win!\n");
+			//}
+			//
+			//else
+			//{
+			//	fase01->Executar(player, player2, window, view, &two_players);
+			//}
+		//if pessoa escolheu jogar fase2
+			//fase02->Executar(player, player2, window, view, &two_players);
 
-		//fase02->Executar(*player, *player2, window, view, &two_players);
-		//player->setFase(2); // p/ o menu
-		//player2->setFase(2); //p/ o menu
+			//player->setFase(2); // p/ o menu
+			//player2->setFase(2); //p/ o menu
 
 
 	}

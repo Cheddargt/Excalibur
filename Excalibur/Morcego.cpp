@@ -63,17 +63,15 @@ void Morcego::Update(float deltaTime)
 	if ((tempoEsquerda > 3.0f) && !(moveRight))
 	{
 		moveRight = true;
-		//printf("direita %f\n", tempoDescida);
 		tempoDescida = relogio1.restart().asSeconds();
 	}
 	else if ((tempoEsquerda > 6.0f) && (moveRight))
 	{
 		moveRight = false;
-		//printf("descendo%f\n ", tempoDescida);
 		tempoDescida = relogio1.restart().asSeconds();
 	}
 
-	//////////////////
+
 
 	if (moveUp)
 	{
@@ -128,7 +126,6 @@ void Morcego::OnCollision(sf::Vector2f direcao)
 {
 	if (direcao.x < 0.0f)		//Colisão à direita
 	{
-
 		velocidade.x = 0.0f;
 		moveRight = false;
 		tempoEsquerda = relogio2.restart().asSeconds();
@@ -136,7 +133,6 @@ void Morcego::OnCollision(sf::Vector2f direcao)
 
 	else if (direcao.x > 0.0f)		//Colisão na esquerda
 	{
-
 		velocidade.x = 0.0f;
 		moveRight = true;
 		tempoEsquerda = relogio2.restart().asSeconds();
@@ -163,47 +159,29 @@ void Morcego::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 	{
 		velocidade.x = 0.0f;
 		moveRight = false;
-		/*tempoEsquerda = relogio2.restart().asSeconds();*/
 
-		//if dano -> knockback
 	}
 
 	else if (direcao.x > 0.0f) //Colisão à esquerda
 	{
 		velocidade.x = 0.0f;
 		moveRight = true;
-		/*tempoEsquerda = relogio2.restart().asSeconds();*/
 
-		//if dano -> knockback
 	}
 
-	if (direcao.y < 0.0f) //Colisão embaixo
+	if (direcao.y < 0.0f) //Colisão em cima
 	{
+		this->setVida(dano);
 		velocidade.y = 0.0f;
 		moveUp = true;
+		/*std::cout << "vida gosma" << this->getHealth();*/
 	}
-	else if (direcao.y > 0.0f) //colisão em cima
+	else if (direcao.y > 0.0f) //colisão embaixo
 	{
+		
 		velocidade.y = 0.0f;
 		moveUp = false;
 
 	}
-
-	//if (direcao.x < 0.0f)  //Colisão na direita
-	//{
-	//	velocidade.x = 0.0f;
-	//	moveRight = false;
-	//}
-
-	//else if (direcao.x > 0.0f) //Colisão na esquerda
-	//{
-	//	velocidade.x = 0.0f;
-	//	moveRight = true;
-	//}
-
-	//if (direcao.y < 0.0f) ////Colisão em cima
-	//	velocidade.y = 0.0f;
-	//else if (direcao.y > 0.0f) //Colisão embaixo
-	//	velocidade.y = 0.0f;
 
 }

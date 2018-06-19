@@ -12,7 +12,7 @@ class Fase2 :
 public:
 	Fase2();
 	~Fase2();
-	int Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers);
+	int Executar(Jogador* player, Jogador* player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers);
 	void ResizeView(const sf::RenderWindow& window, sf::View& view); //verificar
 
 private:
@@ -22,9 +22,19 @@ private:
 	sf::Texture chefaoTexture;
 	sf::Texture caixaTexture;
 	sf::Texture espinhoTexture;
-	std::vector<Item> plataformas;
-	/*std::vector<Item> caixa;*/
+	sf::Texture armaTextureEsq;
+	sf::Texture armaTextureDir;
+	std::vector<Plataforma> plataformas;
+	std::vector<Plataforma> caixas;
+	std::vector<Obstaculo> obstaculos;
+	std::vector<Obstaculo> lavas;
+	std::vector<Esqueleto> esqueletos;
 	std::vector<Obstaculo> espinhos;
+	std::vector<Arma> armas;
+
+	int num_esqueletos;
+	bool checkpoint_reached;
+	sf::Event *evnt;
 
 };
 

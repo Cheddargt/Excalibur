@@ -5,13 +5,15 @@
 #define KNOCKBACK_Y 320
 #define JUMP_SWITCHTIME 0.6f
 
+
+
 Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, int health, int attack, int id, float jumpHeight, int fase) :
 	Personagem(texture, imageCount, switchTime, speed, health, attack, id), jumpHeight(jumpHeight)
 
 {
 	row = 0;
 	faceRight = true;
-	/*std::cout << fase << std::endl;*/
+	this->health = 5;
 	
 
 	body.setSize(sf::Vector2f(100.0f, 150.0f));
@@ -115,6 +117,11 @@ void Jogador::playerUpdate(float deltaTime, bool* twoplayers)
 			//gravidade 9.81 -> 100 unidades sfml = 1 metro	 //sinal negativo -> sfml invertido no eixo Y
 			//squareroot (2.0f * gravity * jumpHeight);		//V(2gh) -> torricellii
 		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			row = 4;
+		}
 	}
 
 	if ((id == 1) && (*twoplayers))
@@ -147,7 +154,7 @@ void Jogador::playerUpdate(float deltaTime, bool* twoplayers)
 	{
 		switchTime = 0.3f; //volta ao normal
 
-		if ((row != 0) && (row!=3))
+		if ((row != 0) && (row!=3) && (row != 4))
 			row = 0;
 		
 	}
@@ -238,25 +245,35 @@ void Jogador::OnCollision(sf::Vector2f direcao)
 
 void Jogador::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
-	if ((direcao.x < 0.0f) && (row != 3))  // added row != 3
+	if (direcao.x < 0.0f)   // added row != 3
 	{ //Colisão à esquerda
-
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = (KNOCKBACK_X);
-		switchTime = 0.3f;
-		row = 3;
+
+		if (row != 3)
+		{
+			setVida(dano);
+			switchTime = 0.3f;
+			row = 3;
+		}
+			
 		
 
 	}
 
-	else if ((direcao.x > 0.0f) && (row != 3)) //added row != 3
+	else if (direcao.x > 0.0f) //added row != 3
 	{ //Colisão na direita
-		
 		
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = -(KNOCKBACK_X);
-		switchTime = 0.3f; //volta ao normal
-		row = 3; 
+
+		if (row != 3)
+		{
+			setVida(dano);
+			switchTime = 0.3f;
+			row = 3;
+		}
+
 	}
 
 	if ((direcao.y < 0.0f) && (row != 3)) //Colisão embaixo //added row != 3
@@ -274,19 +291,29 @@ void Jogador::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 
 	}
 
-	else if ((direcao.y > 0.0f) && (row !=3 )) //colisão em cima ARRUMAR
+	else if ((direcao.y < 0.0f) && (row == 3)) //Colisão embaixo //added row != 3
 	{
+		velocidade.y = -(KNOCKBACK_Y);
+		if (faceRight)
+			velocidade.x = -(KNOCKBACK_X);
+		else
+			velocidade.x = (KNOCKBACK_X);
+	}
 
+	else if (direcao.y > 0.0f) //colisão em cima ARRUMAR
+	{
 			/*velocidade.y = (KNOCKBACK_Y);*/
-
 			if (faceRight)
 				velocidade.x = -(KNOCKBACK_X);
 			else
 				velocidade.x = (KNOCKBACK_X);
 
-			switchTime = 0.3f;
-			row = 3;
-
+			if (row != 3)
+			{
+				setVida(dano);
+				switchTime = 0.3f;
+				row = 3;
+			}
 	}
 
 }
@@ -296,6 +323,7 @@ void Jogador::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 	if ((direcao.x < 0.0f) && (row != 3))  // added row != 3
 	{ //Colisão à esquerda
 
+		setVida(dano);
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = (KNOCKBACK_X);
 		switchTime = 0.3f;
@@ -305,7 +333,7 @@ void Jogador::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 	else if ((direcao.x > 0.0f) && (row != 3)) //added row != 3
 	{ //Colisão na direita
 
-
+		setVida(dano);
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = -(KNOCKBACK_X);
 		switchTime = 0.3f; //volta ao normal
@@ -314,6 +342,7 @@ void Jogador::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 
 	if ((direcao.y < 0.0f) && (row != 3)) //Colisão embaixo //added row != 3
 	{
+		setVida(dano);
 		canJump = false;
 		row = 3;
 		velocidade.y = -(KNOCKBACK_Y);
@@ -324,7 +353,7 @@ void Jogador::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 
 	else if ((direcao.y > 0.0f) && (row != 3)) //colisão em cima ARRUMAR
 	{
-
+		setVida(dano);
 		/*velocidade.y = (KNOCKBACK_Y);*/
 
 		if (faceRight)

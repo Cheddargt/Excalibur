@@ -3,6 +3,9 @@
 #define KNOCKBACK 50
 #define BOSS_KNOCKBACK 30
 
+#include <iostream>
+using namespace std;
+
 class Inimigo :
 	public Personagem
 {

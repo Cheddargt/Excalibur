@@ -12,7 +12,9 @@ public:
 	void Draw(sf::RenderWindow &window);
 	void OnCollision(sf::Vector2f direcao);
 	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
-
+	int getHealth() { return health; }
+	/*void setDamage(int dano) { health -= dano; }*/
+	void ColidiuObstaculo(sf::Vector2f direcao, int dano);
 
 
 private:

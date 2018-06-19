@@ -10,6 +10,7 @@ public:
 
 	void Draw(sf::RenderWindow& window);
 	Colisor GetCollider() { return Colisor(body); }
+	void setPosition(sf::Vector2f position) { body.setPosition(position);}
 
 protected:
 	sf::RectangleShape body;

@@ -4,23 +4,27 @@
 #include <iostream>
 
 Fase1::Fase1()
+	: Fase ()
 {
-	Jogador* player;
-	Jogador* player2;
+
 	/*twoplayers = nullptr;*/
 	/*std::cout << twoplayers << std::endl;*/
-	void ResizeView(const sf::RenderWindow& window, sf::View& view);
-	checkpoint_alcançado = false;
+	void ResizeView(const sf::RenderWindow& window, sf::View& view); //acho que não precisa
+	checkpoint_reached = false;
 
 	srand((unsigned)time(NULL));
+
+
 	num_gosmas = ((rand() % 10) + 1);
 	num_morcegos = ((rand() % 5) + 1);
 
+	backgroundTexture.loadFromFile("background_fase01.png");
+	pedraTexture.loadFromFile("pedra.png");
 	chaoTexture.loadFromFile("plataforma.png");
+
 	gosmaTexture.loadFromFile("gosma.png");
 	morcegoTexture.loadFromFile("morcego.png");
-	pedraTexture.loadFromFile("pedra.png");
-	backgroundTexture.loadFromFile("background_fase01.png");
+	
 	plataformaTexture.loadFromFile("plataforma.png");
 	buracoTexture.loadFromFile("plataforma_dark.png");
 	entradaTexture.loadFromFile("entrada.png");
@@ -41,20 +45,18 @@ Fase1::Fase1()
 Fase1::~Fase1()
 {
 	delete evnt;
-
-	/*delete &plataformas;
-	delete &gosmas;
-	delete &morcegos;
-	delete &obstaculos;*/
+	delete player;
+	delete player2;
 }
 
-int Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers)
+int Fase1::Executar(Jogador* player, Jogador *player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers)
 {
+	this->player = player;
 	this->twoplayers = twoplayers; //ok
 
-	player.SetPosition(3850.0f, -280.0f);
+	player->SetPosition(100.0f, 200.0);
 	if (*twoplayers)
-		player2.SetPosition(50.0f, 200.0);
+		player2->SetPosition(50.0f, 200.0);
 
 	//body.setPosition(3200.0f, 200.0f); //morcego
 	//body.setPosition(1575.0f, 200.0); 
@@ -89,18 +91,13 @@ int Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, s
 	plataformas.push_back(Plataforma(&pedraTexture, sf::Vector2f(400.0f, 400.0f), sf::Vector2f(3750.0f, 200.0f))); //Pedra - obstaculo 3 bounce morcego
 	plataformas.push_back(Plataforma(&pedraTexture, sf::Vector2f(200.0f, 200.0f), sf::Vector2f(3850.0f, -280.0f))); //Pedra - obstaculo final
 	
-	
 	buracos.push_back(Obstaculo(&buracoTexture, sf::Vector2f(580.0f, 500.0f), sf::Vector2f(1120.0f, 800.0f), 10)); //buraco 1
 	buracos.push_back(Obstaculo(&buracoTexture, sf::Vector2f(580.0f, 500.0f), sf::Vector2f(2420.0f, 800.0f), 10)); //buraco 1
 
 	Checkpoint checkpoint(&pedraTexture, sf::Vector2f(300.0f, 2000.0f), sf::Vector2f(4090.0f, -280.0f)); //Pedra - obstaculo final
 
-
-
-
 	float deltaTime = 0.0f; //verificar
 	sf::Clock clock; //verificar
-
 
 	while (window.isOpen())
 	{
@@ -123,10 +120,10 @@ int Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, s
 		}
 	}
 
-	player.playerUpdate(deltaTime, twoplayers);
+	player->playerUpdate(deltaTime, twoplayers);
 
 	if (*twoplayers)
-		player2.playerUpdate(deltaTime, twoplayers);
+		player2->playerUpdate(deltaTime, twoplayers);
 	
 	for (Gosma& gosma : gosmas)
 		gosma.Update(deltaTime);
@@ -139,18 +136,13 @@ int Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, s
 	Item& plataforma = plataformas[i];
 	}**/
 
-	if (checkpoint.GetCollider().CheckCollision(&(player.GetCollider()), direcao, 1.0f))
-	{
-		player.OnCollision(direcao);
-		return (0);
-
-	}
+	
 	for (Item& plataforma : plataformas) //checa todas as plataformas pra ver se alguma delas está colidindo com player
 	{
-		if (plataforma.GetCollider().CheckCollision(&(player.GetCollider()), direcao, 1.0f)) //1.0f não empurra, 0 empurra
-			player.OnCollision(direcao);
-		if (plataforma.GetCollider().CheckCollision(&(player2.GetCollider()), direcao, 1.0f))
-			player2.OnCollision(direcao);
+		if (plataforma.GetCollider().CheckCollision(&(player->GetCollider()), direcao, 1.0f)) //1.0f não empurra, 0 empurra
+			player->OnCollision(direcao);
+		if (plataforma.GetCollider().CheckCollision(&(player2->GetCollider()), direcao, 1.0f))
+			player2->OnCollision(direcao);
 
 		for (Gosma& gosma : gosmas)
 			if (plataforma.GetCollider().CheckCollision(&(gosma.GetCollider()), direcao, 1.0f))
@@ -163,10 +155,14 @@ int Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, s
 
 	for (Obstaculo& buraco : buracos)
 	{
-		if (buraco.GetCollider().CheckCollision(&(player.GetCollider()), direcao, 1.0f)) //1.0f não empurra, 0 empurra
-			player.ColidiuObstaculo(direcao, buraco.getDano());
-		if (buraco.GetCollider().CheckCollision(&(player2.GetCollider()), direcao, 1.0f))
-			player2.ColidiuObstaculo(direcao, buraco.getDano());
+		if (buraco.GetCollider().CheckCollision(&(player->GetCollider()), direcao, 1.0f))
+		{ //1.0f não empurra, 0 empurra
+			player->ColidiuObstaculo(direcao, buraco.getDano());
+			return (0);
+		}		
+			
+		if (buraco.GetCollider().CheckCollision(&(player2->GetCollider()), direcao, 1.0f))
+			player2->ColidiuObstaculo(direcao, buraco.getDano());
 
 		for (Gosma& gosma : gosmas)
 			if (buraco.GetCollider().CheckCollision(&(gosma.GetCollider()), direcao, 1.0f))
@@ -177,52 +173,57 @@ int Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, s
 
 	for (Morcego& morcego : morcegos)
 	{
-		if (player.GetCollider().CheckPlayerCollision(&(morcego.GetCollider()), direcao, 1.0f))
+		if (player->GetCollider().CheckPlayerCollision(&(morcego.GetCollider()), direcao, 1.0f))
 		{
-			player.ColidiuPersonagem(direcao, morcego.getAttack());
-			morcego.ColidiuPersonagem(direcao, player.getAttack());
+			player->ColidiuPersonagem(direcao, morcego.getAttack());
+			morcego.ColidiuPersonagem(direcao, player->getAttack());
 		}
 
-		if ((player2.GetCollider().CheckPlayerCollision(&(morcego.GetCollider()), direcao, 0.5f)) && (twoplayers))
+		if ((player2->GetCollider().CheckPlayerCollision(&(morcego.GetCollider()), direcao, 0.5f)) && (twoplayers))
 		{
-			player2.ColidiuPersonagem(direcao, morcego.getAttack());
-			morcego.ColidiuPersonagem(direcao, player2.getAttack());
+			player2->ColidiuPersonagem(direcao, morcego.getAttack());
+			morcego.ColidiuPersonagem(direcao, player2->getAttack());
 
 		}	
 	}
 	
 	for (Gosma& gosma : gosmas)
 	{
-		if (player.GetCollider().CheckPlayerCollision(&(gosma.GetCollider()), direcao, 1.0f))
+		if (player->GetCollider().CheckPlayerCollision(&(gosma.GetCollider()), direcao, 1.0f))
 		{
-			player.ColidiuPersonagem(direcao, gosma.getAttack());
-			gosma.ColidiuPersonagem(direcao, player.getAttack());
+			player->ColidiuPersonagem(direcao, gosma.getAttack());
+			gosma.ColidiuPersonagem(direcao, player->getAttack());
 
 		}
 
-		if ((player2.GetCollider().CheckCollision(&(gosma.GetCollider()), direcao, 0.5f)) && (twoplayers))
+		if ((player2->GetCollider().CheckCollision(&(gosma.GetCollider()), direcao, 0.5f)) && (twoplayers))
 		{
-			player2.ColidiuPersonagem(direcao, gosma.getAttack());
-			gosma.ColidiuPersonagem(direcao, player2.getAttack());
+			player2->ColidiuPersonagem(direcao, gosma.getAttack());
+			gosma.ColidiuPersonagem(direcao, player2->getAttack());
 
 		}
 
 	}
 
-	view.setCenter(player.GetPosition()); //depois de update sempre
+	view.setCenter(player->GetPosition()); //depois de update sempre
 	window.clear(sf::Color(0, 250, 154));
 	window.draw(background);
 	window.draw(entrada);
 	window.setView(view);
 	checkpoint.Draw(window);
 
-	if (player.getHealth() > 0)
-		player.Draw(window);
+	if (player->getHealth() <= 0)
+	{
+		return (0);
+	}
 	else //game over
-		this->Executar(player, player2, window, view, twoplayers);
+	{
+		player->Draw(window);
+	}
+
 
 	if (*twoplayers)
-		player2.Draw(window);
+		player2->Draw(window);
 	
 
 	for (unsigned int i = 0; i < gosmas.size(); i++)
@@ -252,6 +253,12 @@ int Fase1::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, s
 		morcego.Draw(window);
 
 	window.display();
+
+	if (checkpoint.GetCollider().CheckCollision(&(player->GetCollider()), direcao, 1.0f))
+	{
+		player->OnCollision(direcao);
+		return (1);
+	}
 
 }
 }

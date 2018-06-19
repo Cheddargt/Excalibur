@@ -3,6 +3,11 @@
 #include "Animacao.h"
 #include "Colisor.h"
 #include "Personagem.h"
+#include "Arma.h"
+
+
+#include <iostream>
+using namespace std;
 
 class Jogador : public Personagem
 {
@@ -18,8 +23,9 @@ public:
 	void ColidiuObstaculo(sf::Vector2f direcao, int dano);
 	void setFase(int fase) { this->fase = fase; }
 	int getHealth() { return health; }
-	void setHealth(int dano) { health -= dano; }
-
+	void setVida(int dano) { this->health -= dano; cout << "Health:" << health << endl;} //bug ->vida = 4?
+	void setHealth(int vida) { health = vida; }
+	bool getFaceRight() { return faceRight; }
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	Colisor GetCollider() { return Colisor(body); }
 
@@ -29,6 +35,7 @@ private:
 	bool isJumping;
 	float jumpHeight; //200.f
 	int fase;
+	Arma* arma;
 
 
 };

@@ -14,7 +14,7 @@ public:
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	sf::Vector2f GetHalfSize() { return body.getSize() / 2.0f; }
 
-private:
+protected:
 	sf::RectangleShape& body;
 };
 

@@ -8,17 +8,16 @@ Gosma::Gosma(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, fl
 	Inimigo (texture, imageCount, switchTime, speed, health, attack, id)
 {
 	row = 0;
-	faceRight = false;
-	moveRight = false;
+	faceRight = true;
+	moveRight = true;
 
 	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
 
-	if (this->id == 1)
-		body.setPosition(1575.0f, 375.0f);
+	
+	body.setPosition(1575.0f, 375.0f);
 	body.setSize(sf::Vector2f(50.0f, 50.0f));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setOrigin(body.getSize() / 2.0f);
-	/*body.setPosition(1575.0f, 375.0f);*/
 	body.setTexture(texture);
 }
 
@@ -100,8 +99,7 @@ void Gosma::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 	if (direcao.y < 0.0f) ////Colisão em cima
 	{
 		this->velocidade.y = 0.0f;
-		this->setHealth(dano);
-		/*std::cout << "vida gosma" << this->getHealth();*/
+		this->setVida(dano);
 	}
 		
 	else if (direcao.y > 0.0f) //Colisão embaixo

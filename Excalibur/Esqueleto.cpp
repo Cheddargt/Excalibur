@@ -97,7 +97,50 @@ void Esqueleto::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 	}
 
 	if (direcao.y < 0.0f) ////Colisão em cima
+	{
+		setVida(dano);
 		this->velocidade.y = 0.0f;
+	}
+		
 	else if (direcao.y > 0.0f) //Colisão embaixo
 		this->velocidade.y = 0.0f;
+}
+
+void Esqueleto::ColidiuObstaculo(sf::Vector2f direcao, int dano)
+{
+	if ((direcao.x < 0.0f))  // added row != 3
+	{ //Colisão à esquerda
+		setVida(dano);
+		velocidade.y = -(KNOCKBACK_Y);
+		velocidade.x = (KNOCKBACK_X);
+	}
+
+	else if ((direcao.x > 0.0f)) //added row != 3
+	{ //Colisão na direita
+		setVida(dano);
+		velocidade.y = -(KNOCKBACK_Y);
+		velocidade.x = -(KNOCKBACK_X);
+	}
+
+	if ((direcao.y < 0.0f)) //Colisão embaixo
+	{
+		setVida(dano);
+		velocidade.y = 0.0f;
+		velocidade.x = 0.0f;
+
+	}
+
+	else if ((direcao.y > 0.0f)) //colisão em cima ARRUMAR
+	{
+
+		setVida(dano);
+
+		if (faceRight)
+			velocidade.x = -(KNOCKBACK_X);
+		else
+			velocidade.x = (KNOCKBACK_X);
+
+
+	}
+
 }
