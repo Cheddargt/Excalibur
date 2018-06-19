@@ -9,6 +9,10 @@
 #include <iostream>
 #include <vector>
 #include <time.h>
+#include "Plataforma.h"
+#include "Obstaculo.h"
+#include "Checkpoint.h"
+
 using namespace std;
 
 class Fase
@@ -16,7 +20,7 @@ class Fase
 public:
 	Fase();
 	~Fase();
-	virtual void Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers) = 0;
+	virtual int Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers) = 0;
 	void ResizeView(const sf::RenderWindow& window, sf::View& view); //verificar
 
 protected:

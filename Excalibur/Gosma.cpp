@@ -101,9 +101,50 @@ void Gosma::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 	{
 		this->velocidade.y = 0.0f;
 		this->setHealth(dano);
-		std::cout << "vida gosma" << this->getHealth();
+		/*std::cout << "vida gosma" << this->getHealth();*/
 	}
 		
 	else if (direcao.y > 0.0f) //Colisão embaixo
 		this->velocidade.y = 0.0f;
+}
+
+void Gosma::ColidiuObstaculo(sf::Vector2f direcao, int dano)
+{
+	if ((direcao.x < 0.0f) && (row != 3))  // added row != 3
+	{ //Colisão à esquerda
+		setVida(dano);
+		velocidade.y = -(KNOCKBACK_Y);
+		velocidade.x = (KNOCKBACK_X);
+	}
+
+	else if ((direcao.x > 0.0f) && (row != 3)) //added row != 3
+	{ //Colisão na direita
+		setVida(dano);
+		velocidade.y = -(KNOCKBACK_Y);
+		velocidade.x = -(KNOCKBACK_X);
+	}
+
+	if ((direcao.y < 0.0f) && (row != 3)) //Colisão embaixo
+	{
+		setVida(dano);
+		velocidade.y = -(KNOCKBACK_Y);
+		velocidade.x = -(KNOCKBACK_X);
+
+
+	}
+
+	else if ((direcao.y > 0.0f) && (row != 3)) //colisão em cima ARRUMAR
+	{
+
+		setVida(dano);
+
+		if (faceRight)
+			velocidade.x = -(KNOCKBACK_X);
+		else
+			velocidade.x = (KNOCKBACK_X);
+		
+
+
+	}
+
 }

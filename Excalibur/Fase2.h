@@ -12,7 +12,7 @@ class Fase2 :
 public:
 	Fase2();
 	~Fase2();
-	void Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers);
+	int Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers);
 	void ResizeView(const sf::RenderWindow& window, sf::View& view); //verificar
 
 private:

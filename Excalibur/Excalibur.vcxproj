@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animacao.h" />
+    <ClInclude Include="Checkpoint.h" />
     <ClInclude Include="Chefao.h" />
     <ClInclude Include="Esqueleto.h" />
     <ClInclude Include="Fase.h" />
@@ -169,11 +170,13 @@
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Plataforma.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animacao.cpp" />
+    <ClCompile Include="Checkpoint.cpp" />
     <ClCompile Include="Chefao.cpp" />
     <ClCompile Include="Esqueleto.cpp" />
     <ClCompile Include="Fase.cpp" />
@@ -190,6 +193,7 @@
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

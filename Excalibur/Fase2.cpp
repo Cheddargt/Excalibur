@@ -16,7 +16,7 @@ Fase2::~Fase2()
 {
 }
 
-void Fase2::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers)
+int Fase2::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers)
 {
 	this->twoplayers = twoplayers; //ok
 
@@ -45,7 +45,6 @@ void Fase2::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 	Esqueleto esqueleto(&esqueletoTexture, sf::Vector2u(4, 2), 0.5f, 100.0f, 3, 1, 1);
 	Chefao chefao(&chefaoTexture, sf::Vector2u(1, 6), 0.3f, 100.0f, 3, 1, 1);
 
-
 	esqueleto.SetPosition(190.0f, -120.0f);
 
 	std::vector<Esqueleto> esqueletos;
@@ -56,8 +55,9 @@ void Fase2::Executar(Jogador player, Jogador player2, sf::RenderWindow& window, 
 	//morcegos.push_back(Morcego(&morcegoTexture, sf::Vector2u(3, 1), 0.3f, 100.0f, 3, 1, 1));
 	//gosmas.push_back(Gosma(&gosmaTexture, sf::Vector2u(3, 2), 0.3f, 100.0f, 3, 1, 1));
 
-	plataformas.push_back(Item(&plataformaTexture, sf::Vector2f(400.0f, 400.0f), sf::Vector2f(0.0f, 200.0f))); //Pedra inicio
-	plataformas.push_back(Item(&chaoTexture, sf::Vector2f(3000.0f, 200.0f), sf::Vector2f(1300.0f, 500.0f))); //chao 1
+	plataformas.push_back(Plataforma(&plataformaTexture, sf::Vector2f(50.0f, 2000.0f), sf::Vector2f(-200.0f, 0.0f))); //parede inicio
+	plataformas.push_back(Plataforma(&plataformaTexture, sf::Vector2f(400.0f, 400.0f), sf::Vector2f(0.0f, 200.0f))); //Pedra inicio
+	plataformas.push_back(Plataforma(&chaoTexture, sf::Vector2f(3000.0f, 200.0f), sf::Vector2f(1300.0f, 500.0f))); //chao 1
 	//plataformas.push_back(Item(&plataformaTexture, sf::Vector2f(200.0f, 200.0f), sf::Vector2f(500.0f, 310.0f))); //Pedra - obstaculo 1 sem bounce
 	//plataformas.push_back(Item(&plataformaTexture, sf::Vector2f(50.0f, 50.0f), sf::Vector2f(975.0f, 375.0f))); //bloquinho esquerda
 	//plataformas.push_back(Item(&plataformaTexture, sf::Vector2f(50.0f, 50.0f), sf::Vector2f(1275.0f, 375.0f))); //bloquinho direita

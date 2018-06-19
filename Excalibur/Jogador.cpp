@@ -11,7 +11,7 @@ Jogador::Jogador (sf::Texture* texture, sf::Vector2u imageCount, float switchTim
 {
 	row = 0;
 	faceRight = true;
-	std::cout << fase << std::endl;
+	/*std::cout << fase << std::endl;*/
 	
 
 	body.setSize(sf::Vector2f(100.0f, 150.0f));

@@ -19,7 +19,7 @@ view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT))
 	fase02 = new Fase2; //verificar
 	deltaTime = 0.0f;
 	two_players = false;
-	std::cout << two_players << std::endl;
+	/*std::cout << two_players << std::endl;*/
 
 }
 
@@ -67,8 +67,8 @@ void Jogo::Executar()
 
 		
 		fase01->Executar(*player, *player2, window, view, &two_players); //& = player.funcao na fase e * = player->funcao
-		player->setFase(1); // p/ o menu
-		player2->setFase(1); //p/ o menu
+		//player->setFase(1); // p/ o menu
+		//player2->setFase(1); //p/ o menu
 
 		//fase02->Executar(*player, *player2, window, view, &two_players);
 		//player->setFase(2); // p/ o menu
