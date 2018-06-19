@@ -8,7 +8,7 @@ Fase1::Fase1()
 {
 
 	twoplayers = nullptr;
-	void ResizeView(const sf::RenderWindow& window, sf::View& view); //acho que não precisa
+	void ResizeView(const sf::RenderWindow& window, sf::View& view);
 	checkpoint_reached = false;
 
 	srand((unsigned)time(NULL));
@@ -43,11 +43,7 @@ Fase1::~Fase1()
 
 int Fase1::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers)
 {
-	this->twoplayers = twoplayers; //ok
-
-	//player->SetPosition(100.0f, 200.0);
-	///*if (*twoplayers)
-	//	(*player2)->SetPosition(100.0f, 200.0);*/
+	this->twoplayers = twoplayers;
 
 
 	for (int i = 0; i < num_gosmas; i++)
@@ -73,11 +69,11 @@ int Fase1::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 	plataformas.push_back(Plataforma(&chaoTexture, sf::Vector2f(1100.0f, 200.0f), sf::Vector2f(3080.0f, 500.0f))); //Chao 3
 	plataformas.push_back(Plataforma(&chaoTexture, sf::Vector2f(1000.0f, 200.0f), sf::Vector2f(3950.0f, 500.0f))); //Chao 4
 	plataformas.push_back(Plataforma(&pedraTexture, sf::Vector2f(400.0f, 400.0f), sf::Vector2f(3750.0f, 200.0f))); //Pedra - obstaculo 3 bounce morcego
-	plataformas.push_back(Plataforma(&pedraTexture, sf::Vector2f(200.0f, 200.0f), sf::Vector2f(3850.0f, -280.0f))); //Pedra - obstaculo final
+	plataformas.push_back(Plataforma(&pedraTexture, sf::Vector2f(200.0f, 200.0f), sf::Vector2f(3850.0f, -280.0f))); //Pedra - adicional
 	buracos.push_back(Obstaculo(&buracoTexture, sf::Vector2f(580.0f, 500.0f), sf::Vector2f(1120.0f, 800.0f), 10)); //Buraco 1
 	buracos.push_back(Obstaculo(&buracoTexture, sf::Vector2f(580.0f, 500.0f), sf::Vector2f(2420.0f, 800.0f), 10)); //Buraco 1
 
-	Checkpoint checkpoint(&pedraTexture, sf::Vector2f(300.0f, 2000.0f), sf::Vector2f(4090.0f, -280.0f)); //Pedra - obstaculo final
+	Checkpoint checkpoint(&pedraTexture, sf::Vector2f(300.0f, 2000.0f), sf::Vector2f(4090.0f, -280.0f)); //Checkpoint
 
 	float deltaTime = 0.0f;
 	sf::Clock clock;
@@ -196,7 +192,7 @@ int Fase1::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 			(*player2)->Draw(window);
 
 
-		for (unsigned int i = 0; i < gosmas.size(); i++)
+		for (unsigned int i = 0; i < gosmas.size(); i++) //update do vetor de morcegos
 		{
 			if (gosmas[i].getHealth() > 0)
 				gosmas[i].Draw(window);

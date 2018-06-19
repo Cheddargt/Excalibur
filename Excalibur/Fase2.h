@@ -1,9 +1,5 @@
 #pragma once
 #include "Fase.h"
-#include "Jogador.h"
-#include "Obstaculo.h"
-#include "Esqueleto.h"
-#include "Chefao.h"
 
 
 class Fase2 :

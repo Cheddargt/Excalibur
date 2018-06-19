@@ -12,7 +12,7 @@ Colisor::~Colisor()
 {
 }
 
-bool Colisor::CheckCollision(Colisor* other, sf::Vector2f& direcao, float push) //&other e &direcao
+bool Colisor::CheckCollision(Colisor* other, sf::Vector2f& direcao, float push)
 {
 	sf::Vector2f otherPosition = other->GetPosition();
 	sf::Vector2f otherHalfSize = other->GetHalfSize();
@@ -35,50 +35,50 @@ bool Colisor::CheckCollision(Colisor* other, sf::Vector2f& direcao, float push) 
 				Move(intersectX * (1.0f - push), 0.0f);
 				other->Move(-intersectX * push, 0.0f);
 
-				direcao.x = 1.0f; //direcao->x = 1.0f;
-				direcao.y = 0.0f; //direcao->y = 0.0f;
+				direcao.x = 1.0f; 
+				direcao.y = 0.0f;
 			}
 			else
 			{
 				Move(-intersectX * (1.0f - push), 0.0f);
 				other->Move(intersectX * push, 0.0f);
 
-				direcao.x = -1.0f; //direcao->x = -1.0f;
-				direcao.y = 0.0f; //direcao->y = 0.0f;
+				direcao.x = -1.0f; 
+				direcao.y = 0.0f; 
 			}
 
 		}
 
 		else
 		{
-			if (deltaY > 0.0f) //em cima
+			if (deltaY > 0.0f) 
 			{
 				Move(0.0f, intersectY * (1.0f - push));
 				other->Move(0.0f, -intersectY * push);
 
-				direcao.x = 0.0f; //direcao->x = 0.0f;
-				direcao.y = 1.0f; //direcao->y = 0.0f;
-				//direcao.y = -1.0f; //direcao->y = 0.0f;
+				direcao.x = 0.0f; 
+				direcao.y = 1.0f; 
+				
 			}
-			else if (deltaY < 0.0f)//embaixo
+			else if (deltaY < 0.0f)
 			{
 				Move(0.0f, -intersectY * (1.0f - push));
 				other->Move(0.0f, intersectY * push);
 
-				direcao.x = 0.0f; //direcao->x = 0.0f;
-				direcao.y = -1.0f; //direcao->y = 0.0f;
+				direcao.x = 0.0f;
+				direcao.y = -1.0f;
 			}
 
-			//if (deltaY > )
+			
 		}
-		return true; //caso um projetil inimigo esteja colidindo com o inimigo
+		return true; 
 	}
 
-	return false; //quando não há colisão acontecendo
+	return false; 
 }
 
 
-bool Colisor::CheckPlayerCollision(Colisor* other, sf::Vector2f& direcao, float push) //&other e &direcao
+bool Colisor::CheckPlayerCollision(Colisor* other, sf::Vector2f& direcao, float push)
 {
 	sf::Vector2f otherPosition = other->GetPosition();
 	sf::Vector2f otherHalfSize = other->GetHalfSize();
@@ -101,8 +101,8 @@ bool Colisor::CheckPlayerCollision(Colisor* other, sf::Vector2f& direcao, float 
 				Move(intersectX * (1.0f - push), 0.0f);
 				other->Move(-intersectX * push, 0.0f);
 
-				direcao.x = 1.0f; //direcao->x = 1.0f;
-				direcao.y = 0.0f; //direcao->y = 0.0f;
+				direcao.x = 1.0f; 
+				direcao.y = 0.0f; 
 				
 			}
 			else
@@ -110,8 +110,8 @@ bool Colisor::CheckPlayerCollision(Colisor* other, sf::Vector2f& direcao, float 
 				Move(-intersectX * (1.0f - push), 0.0f);
 				other->Move(intersectX * push, 0.0f);
 
-				direcao.x = -1.0f; //direcao->x = -1.0f;
-				direcao.y = 0.0f; //direcao->y = 0.0f;
+				direcao.x = -1.0f; 
+				direcao.y = 0.0f; 
 
 			}
 
@@ -119,32 +119,32 @@ bool Colisor::CheckPlayerCollision(Colisor* other, sf::Vector2f& direcao, float 
 
 		else
 		{
-			if (deltaY > 0.0f) //em cima
+			if (deltaY > 0.0f)
 			{
 				Move(0.0f, intersectY * (1.0f - push));
 				other->Move(0.0f, -intersectY * push);
 
-				direcao.x = 0.0f; //direcao->x = 0.0f;
-				direcao.y = -1.0f; //direcao->y = 0.0f;
-								   //direcao.y = -1.0f; //direcao->y = 0.0f;
+				direcao.x = 0.0f; 
+				direcao.y = -1.0f; 
+								   
 				
 			}
-			else //embaixo
+			else 
 			{
 				Move(0.0f, -intersectY * (1.0f - push));
 				other->Move(0.0f, intersectY * push);
 
-				direcao.x = 0.0f; //direcao->x = 0.0f;
-				direcao.y = 1.0f; //direcao->y = 0.0f;
+				direcao.x = 0.0f; 
+				direcao.y = 1.0f; 
 
 				
 			}
 
 
 		}
-		return true; //caso um projetil inimigo esteja colidindo com o inimigo
+		return true; 
 	}
 
-	return false; //quando não há colisão acontecendo
+	return false; 
 }
 

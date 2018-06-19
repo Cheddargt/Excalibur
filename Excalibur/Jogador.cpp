@@ -291,8 +291,8 @@ void Jogador::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 
 void Jogador::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 {
-	if ((direcao.x < 0.0f) && (row != 3))  // added row != 3
-	{ //Colisão à esquerda
+	if ((direcao.x < 0.0f) && (row != 3)) 
+	{ 
 
 		setVida(dano);
 		velocidade.y = -(KNOCKBACK_Y);
@@ -318,14 +318,14 @@ void Jogador::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 		row = 3;
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = -(KNOCKBACK_X);
-		switchTime = 0.3f; //volta ao normal
+		switchTime = 0.3f;
 
 	}
 
-	else if ((direcao.y > 0.0f) && (row != 3)) //colisão em cima ARRUMAR
+	else if ((direcao.y > 0.0f) && (row != 3)) 
 	{
 		setVida(dano);
-		/*velocidade.y = (KNOCKBACK_Y);*/
+		
 
 		if (faceRight)
 			velocidade.x = -(KNOCKBACK_X);

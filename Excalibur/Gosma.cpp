@@ -29,15 +29,13 @@ Gosma::~Gosma()
 
 void Gosma::Update(float deltaTime)
 {
-	/*if (getHealth() > 0)
-	{*/
 
 	if (moveRight)
 		velocidade.x = speed;
 	else
 		velocidade.x = -speed;
 		
-	velocidade.y += 981.0f * deltaTime; //gravidade
+	velocidade.y += 981.0f * deltaTime; 
 
 	if (velocidade.x == 0.0f)
 		row = 0;
@@ -49,11 +47,10 @@ void Gosma::Update(float deltaTime)
 			faceRight = true;
 		else
 			faceRight = false;
-	/*}*/
 
 	animacao.Update(row, deltaTime, faceRight);
 	body.setTextureRect(animacao.uvRect);
-	body.move(velocidade * deltaTime); //move não ser mais frame-específico
+	body.move(velocidade * deltaTime); 
 	}
 }
 
@@ -64,65 +61,65 @@ void Gosma::Draw(sf::RenderWindow& window)
 
 void Gosma::OnCollision(sf::Vector2f direcao)
 {
-	if (direcao.x < 0.0f) //Colisão à direita
+	if (direcao.x < 0.0f) 
 	{ 
 		this->velocidade.x = 0.0f;
 		this->moveRight = false;
 	}
 
-	else if (direcao.x > 0.0f) //Colisão à esquerda
+	else if (direcao.x > 0.0f) 
 	{
 		this->velocidade.x = 0.0f;
 		this->moveRight = true;
 	}
 
-	if (direcao.y < 0.0f) //Colisão embaixo
+	if (direcao.y < 0.0f) 
 		this->velocidade.y = 0.0f;
-	else if (direcao.y > 0.0f) //Colisão em cima
+	else if (direcao.y > 0.0f)
 		this->velocidade.y = 0.0f;
 }
 
 void Gosma::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
-	if (direcao.x < 0.0f)  //Colisão na direita
+	if (direcao.x < 0.0f)  
 	{
 		this->velocidade.x = 0.0f;
 		this->moveRight = false;
 	}
 
-	else if (direcao.x > 0.0f) //Colisão na esquerda
+	else if (direcao.x > 0.0f) 
 	{
 		this->velocidade.x = 0.0f;
 		this->moveRight = true;
 	}
 
-	if (direcao.y < 0.0f) ////Colisão em cima
+	if (direcao.y < 0.0f) 
 	{
 		this->velocidade.y = 0.0f;
 		this->setVida(dano);
 	}
 		
-	else if (direcao.y > 0.0f) //Colisão embaixo
+	else if (direcao.y > 0.0f) 
 		this->velocidade.y = 0.0f;
 }
 
 void Gosma::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 {
-	if ((direcao.x < 0.0f) && (row != 3))  // added row != 3
-	{ //Colisão à esquerda
+	if ((direcao.x < 0.0f) && (row != 3))  
+	{ 
 		setVida(dano);
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = (KNOCKBACK_X);
 	}
 
-	else if ((direcao.x > 0.0f) && (row != 3)) //added row != 3
-	{ //Colisão na direita
+	else if ((direcao.x > 0.0f) && (row != 3)) 
+	{ 
 		setVida(dano);
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = -(KNOCKBACK_X);
 	}
 
-	if ((direcao.y < 0.0f) && (row != 3)) //Colisão embaixo
+	if ((direcao.y < 0.0f) && (row != 3)) 
 	{
 		setVida(dano);
 		velocidade.y = -(KNOCKBACK_Y);
@@ -131,18 +128,13 @@ void Gosma::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 
 	}
 
-	else if ((direcao.y > 0.0f) && (row != 3)) //colisão em cima ARRUMAR
+	else if ((direcao.y > 0.0f) && (row != 3)) 
 	{
-
 		setVida(dano);
 
 		if (faceRight)
 			velocidade.x = -(KNOCKBACK_X);
 		else
 			velocidade.x = (KNOCKBACK_X);
-		
-
-
 	}
-
 }

@@ -21,14 +21,12 @@ Chefao::Chefao(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	body.setPosition(3200.0f, 50.0f);
 	body.setTexture(texture);
 
-
 }
 
 
 Chefao::~Chefao()
 {
 }
-
 
 void Chefao::Update(float deltaTime)
 {
@@ -127,13 +125,13 @@ void Chefao::OnCollision(sf::Vector2f direcao)
 		tempoEsquerda = relogio2.restart().asSeconds();
 	}
 
-	if (direcao.y < 0.0f)		//Colisão embaixo
+	if (direcao.y < 0.0f)		//Colisão em cima
 	{
 		velocidade.y = 0.0f;
 		moveUp = true;
 		tempoDescida = relogio1.restart().asSeconds();
 	}
-	else if (direcao.y > 0.0f)		//Colisão em cima
+	else if (direcao.y > 0.0f)		//Colisão embaixo
 	{
 		moveUp = false;
 		velocidade.y = 0.0f;
@@ -143,25 +141,25 @@ void Chefao::OnCollision(sf::Vector2f direcao)
 
 void Chefao::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
-	if (direcao.x < 0.0f) //Colisão à direita
+	if (direcao.x < 0.0f) 
 	{
 		velocidade.x = 0.0f;
 		moveRight = false;
 	}
 
-	else if (direcao.x > 0.0f) //Colisão à esquerda
+	else if (direcao.x > 0.0f) 
 	{
 		velocidade.x = 0.0f;
 		moveRight = true;
 	}
 
-	if (direcao.y < 0.0f) //Colisão em cima
+	if (direcao.y < 0.0f) 
 	{
 		setVida(dano);
 		velocidade.y = 0.0f;
 		moveUp = true;
 	}
-	else if (direcao.y > 0.0f) //Colisão embaixo
+	else if (direcao.y > 0.0f) 
 	{
 		velocidade.y = 0.0f;
 		moveUp = false;

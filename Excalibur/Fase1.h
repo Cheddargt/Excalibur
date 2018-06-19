@@ -1,8 +1,6 @@
 #pragma once
 #include "Fase.h"
 
-
-
 class Fase1 :
 	public Fase
 {
@@ -26,7 +24,6 @@ private:
 	std::vector<Plataforma> plataformas;
 	std::vector<Gosma> gosmas;
 	std::vector<Morcego> morcegos;
-	/*std::vector<Obstaculo> obstaculos;*/
 	std::vector<Obstaculo> buracos;
 	int num_gosmas;
 	int num_morcegos;

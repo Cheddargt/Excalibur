@@ -100,7 +100,7 @@ int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 		chefao.Update(deltaTime);
 
 
-		for (Plataforma& plataforma : plataformas) //plataforma colidindo com as coisas
+		for (Plataforma& plataforma : plataformas) //plataformas colidindo com players e inimigos
 		{
 			if (plataforma.GetCollider().CheckCollision(&(player->GetCollider()), direcao, 1.0f)) 
 				player->OnCollision(direcao);
@@ -116,7 +116,7 @@ int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 
 		}
 
-		for (Plataforma& caixa : caixas) //plataforma colidindo com as coisas
+		for (Plataforma& caixa : caixas) //caixas colidindo com os players e inimigos
 		{
 			if (caixa.GetCollider().CheckCollision(&(player->GetCollider()), direcao, 0.4f))
 				player->OnCollision(direcao);
@@ -132,7 +132,7 @@ int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 
 		}
 
-		for (Obstaculo& espinho : espinhos) //checa todas as plataformas pra ver se alguma delas está colidindo com player
+		for (Obstaculo& espinho : espinhos) //checa todos os espinhos pra ver se algum deles está colidindo com player
 		{
 			if (espinho.GetCollider().CheckCollision(&(player->GetCollider()), direcao, 1.0f))
 				player->ColidiuObstaculo(direcao, espinho.getDano());
@@ -146,19 +146,19 @@ int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 
 
 
-	if (player->GetCollider().CheckPlayerCollision(&(chefao.GetCollider()), direcao, 1.0f)) //chefao colidindo com as coisas
+	if (player->GetCollider().CheckPlayerCollision(&(chefao.GetCollider()), direcao, 1.0f)) //chefao colidindo com player 1
 	{
 		player->ColidiuPersonagem(direcao, chefao.getAttack());
 		chefao.ColidiuPersonagem(direcao, player->getAttack());
 	}
-	if ((*twoplayers) && (player->GetCollider().CheckPlayerCollision(&(chefao.GetCollider()), direcao, 1.0f))) //chefao colidindo com as coisas
+	if ((*twoplayers) && (player->GetCollider().CheckPlayerCollision(&(chefao.GetCollider()), direcao, 1.0f))) //chefao colidindo com player 2
 	{
 		(*player2)->ColidiuPersonagem(direcao, chefao.getAttack());
 		chefao.ColidiuPersonagem(direcao, (*player2)->getAttack());
 	}
 
 
-		for (Esqueleto& esqueleto : esqueletos) //esqueleto colidindo com as coisas
+		for (Esqueleto& esqueleto : esqueletos) //esqueleto colidindo com as players e obstaculos
 		{
 			if (player->GetCollider().CheckPlayerCollision(&(esqueleto.GetCollider()), direcao, 1.0f))
 			{
@@ -184,8 +184,8 @@ int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 		}
 
 
-		view.setCenter(player->GetPosition()); //depois de update sempre
-		window.clear(sf::Color(30, 30, 30)); // RED=0, GREEN=255, BLUE=0
+		view.setCenter(player->GetPosition());
+		window.clear(sf::Color(30, 30, 30)); 
 		window.draw(background);
 		window.setView(view);
 		player->Draw(window);
@@ -226,15 +226,9 @@ int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 		for (Obstaculo& espinho : espinhos)
 			espinho.Draw(window);
 
-	
-
 		window.display();
 
-
-
 	}
-
-	return(0);
 }
 
 void Fase2::ResizeView(const sf::RenderWindow & window, sf::View & view)

@@ -10,11 +10,7 @@ Esqueleto::Esqueleto(sf::Texture* texture, sf::Vector2u imageCount, float switch
 	faceRight = false;
 	moveRight = false;
 
-	//void Update(float deltaTime);
-	//void Draw(sf::RenderWindow &window);
-	//void OnCollision(sf::Vector2f direcao);
 	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
-
 
 	body.setSize(sf::Vector2f(80.0f, 120.0f));
 	body.setOrigin(body.getSize() / 2.0f);
@@ -35,8 +31,6 @@ void Esqueleto::Update(float deltaTime)
 		velocidade.x = speed;
 	else
 		velocidade.x = -speed;
-
-
 
 	velocidade.y += 981.0f * deltaTime; //gravidade
 
@@ -64,65 +58,65 @@ void Esqueleto::Draw(sf::RenderWindow& window)
 
 void Esqueleto::OnCollision(sf::Vector2f direcao)
 {
-	if (direcao.x < 0.0f) //Colisão à direita
+	if (direcao.x < 0.0f) 
 	{
 		this->velocidade.x = 0.0f;
 		this->moveRight = false;
 	}
 
-	else if (direcao.x > 0.0f) //Colisão à esquerda
+	else if (direcao.x > 0.0f)
 	{
 		this->velocidade.x = 0.0f;
 		this->moveRight = true;
 	}
 
-	if (direcao.y < 0.0f) //Colisão embaixo
+	if (direcao.y < 0.0f) 
 		this->velocidade.y = 0.0f;
-	else if (direcao.y > 0.0f) //Colisão em cima
+	else if (direcao.y > 0.0f) 
 		this->velocidade.y = 0.0f;
 }
 
 void Esqueleto::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 {
-	if (direcao.x < 0.0f)  //Colisão na direita
+	if (direcao.x < 0.0f)  
 	{
 		this->velocidade.x = 0.0f;
 		this->moveRight = false;
 	}
 
-	else if (direcao.x > 0.0f) //Colisão na esquerda
+	else if (direcao.x > 0.0f) 
 	{
 		this->velocidade.x = 0.0f;
 		this->moveRight = true;
 	}
 
-	if (direcao.y < 0.0f) ////Colisão em cima
+	if (direcao.y < 0.0f) 
 	{
 		setVida(dano);
 		this->velocidade.y = 0.0f;
 	}
 		
-	else if (direcao.y > 0.0f) //Colisão embaixo
+	else if (direcao.y > 0.0f) 
 		this->velocidade.y = 0.0f;
 }
 
 void Esqueleto::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 {
-	if ((direcao.x < 0.0f))  // added row != 3
-	{ //Colisão à esquerda
+	if ((direcao.x < 0.0f)) 
+	{ 
 		setVida(dano);
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = (KNOCKBACK_X);
 	}
 
-	else if ((direcao.x > 0.0f)) //added row != 3
-	{ //Colisão na direita
+	else if ((direcao.x > 0.0f)) 
+	{ 
 		setVida(dano);
 		velocidade.y = -(KNOCKBACK_Y);
 		velocidade.x = -(KNOCKBACK_X);
 	}
 
-	if ((direcao.y < 0.0f)) //Colisão embaixo
+	if ((direcao.y < 0.0f)) 
 	{
 		setVida(dano);
 		velocidade.y = 0.0f;
@@ -130,7 +124,7 @@ void Esqueleto::ColidiuObstaculo(sf::Vector2f direcao, int dano)
 
 	}
 
-	else if ((direcao.y > 0.0f)) //colisão em cima ARRUMAR
+	else if ((direcao.y > 0.0f)) 
 	{
 
 		setVida(dano);
