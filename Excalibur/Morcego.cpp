@@ -88,7 +88,7 @@ void Morcego::Update(float deltaTime)
 		//printf("subindo %f\n", tempoDescida);
 		tempoDescida = relogio1.restart().asSeconds();
 	}
-	else if ((tempoDescida > 3.0f) && (moveUp))
+	else if ((tempoDescida > 2.5f) && (moveUp))
 	{
 		moveUp = false;
 		//printf("descendo%f\n ", tempoDescida);
@@ -174,7 +174,6 @@ void Morcego::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 		this->setVida(dano);
 		velocidade.y = 0.0f;
 		moveUp = true;
-		/*std::cout << "vida gosma" << this->getHealth();*/
 	}
 	else if (direcao.y > 0.0f) //colisão embaixo
 	{

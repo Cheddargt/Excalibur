@@ -3,9 +3,6 @@
 #define KNOCKBACK 50
 #define BOSS_KNOCKBACK 30
 
-#include <iostream>
-using namespace std;
-
 class Inimigo :
 	public Personagem
 {
@@ -17,7 +14,6 @@ public:
 	virtual void Update(float deltaTime) = 0;
 	virtual void Draw(sf::RenderWindow &window) = 0;
 	virtual void OnCollision(sf::Vector2f direcao) = 0;
-	void setVida(int x) { health -= x; }
 	const int getVida() { return health; }
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	Colisor GetCollider() { return Colisor(body); }

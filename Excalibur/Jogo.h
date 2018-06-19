@@ -3,11 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Jogador.h"
-#include "Personagem.h"
-#include "Gosma.h"
-#include "Morcego.h"
 #include "Menu.h"
-#include "Fase.h"
 #include "Fase1.h"
 #include "Fase2.h"
 
@@ -25,7 +21,7 @@ public:
 private:
 	
 	sf::View view;
-
+	bool fase1_zerada;
 	Menu *menu;
 	sf::RenderWindow window;
 	Jogador* player;
@@ -37,7 +33,7 @@ private:
 	sf::Clock clock;
 	float deltaTime;
 	bool two_players;
-	sf::Event* evnt; //verificar
+	sf::Event evnt; //verificar
 	
 };
 

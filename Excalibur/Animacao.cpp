@@ -9,8 +9,8 @@ Animacao::Animacao(sf::Texture* texture, sf::Vector2u imageCount, float switchTi
 	totalTime = 0.0f;
 	currentImage.x = 0;
 
-	uvRect.width = texture->getSize().x / float(imageCount.x);
-	uvRect.height = texture->getSize().y / float(imageCount.y);
+	uvRect.width = static_cast <int> (texture->getSize().x / float(imageCount.x));
+	uvRect.height = static_cast <int> (texture->getSize().y / float(imageCount.y));
 
 }
 

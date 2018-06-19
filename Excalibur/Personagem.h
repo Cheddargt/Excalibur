@@ -20,6 +20,7 @@ public:
 	sf::Vector2f GetPosition() { return body.getPosition(); } //não sei se serão virtual tb
 	Colisor GetCollider() { return Colisor(body); } //não sei se serão virtual tb
 	int getAttack() { return attack; }
+	virtual void setVida(int danoRecebido) { health -= danoRecebido; };
 
 protected:
 	float switchTime;

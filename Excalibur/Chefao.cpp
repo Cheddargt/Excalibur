@@ -10,17 +10,12 @@ Chefao::Chefao(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	faceRight = false;
 	moveRight = false;
 	moveUp = false;
-
 	tempoDescida = relogio1.restart().asSeconds();
 	tempoEsquerda = relogio2.restart().asSeconds();
 
-
-	//void Update(float deltaTime);
-	//void Draw(sf::RenderWindow &window);
-	//void OnCollision(sf::Vector2f direcao);
 	void ColidiuPersonagem(sf::Vector2f direcao, int dano);
 
-	body.setSize(sf::Vector2f(200.0f, 200.0f));
+	body.setSize(sf::Vector2f(130.0f, 130.0f));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setPosition(3200.0f, 50.0f);
@@ -108,7 +103,7 @@ void Chefao::Update(float deltaTime)
 
 	animacao.Update(this->row, deltaTime, this->faceRight);
 	body.setTextureRect(this->animacao.uvRect);
-	body.move((this->velocidade) * deltaTime); //move não ser mais frame-específico
+	body.move((this->velocidade) * deltaTime);
 }
 
 void Chefao::Draw(sf::RenderWindow& window)
@@ -160,17 +155,16 @@ void Chefao::ColidiuPersonagem(sf::Vector2f direcao, int dano)
 		moveRight = true;
 	}
 
-	if (direcao.y < 0.0f) //Colisão embaixo
-	{
-		velocidade.y = 0.0f;
-		moveUp = true;
-	}
-	else if (direcao.y > 0.0f) //colisão em cima
+	if (direcao.y < 0.0f) //Colisão em cima
 	{
 		setVida(dano);
 		velocidade.y = 0.0f;
+		moveUp = true;
+	}
+	else if (direcao.y > 0.0f) //Colisão embaixo
+	{
+		velocidade.y = 0.0f;
 		moveUp = false;
-
 	}
 
 }

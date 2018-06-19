@@ -1,13 +1,9 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Animacao.h"
-#include "Colisor.h"
 #include "Personagem.h"
-#include "Arma.h"
+#include <string>
 
-
-#include <iostream>
-using namespace std;
 
 class Jogador : public Personagem
 {
@@ -23,19 +19,22 @@ public:
 	void ColidiuObstaculo(sf::Vector2f direcao, int dano);
 	void setFase(int fase) { this->fase = fase; }
 	int getHealth() { return health; }
-	void setVida(int dano) { this->health -= dano; cout << "Health:" << health << endl;} //bug ->vida = 4?
+	void setVida(int danoRecebido);
 	void setHealth(int vida) { health = vida; }
 	bool getFaceRight() { return faceRight; }
 	sf::Vector2f GetPosition() { return body.getPosition(); }
 	Colisor GetCollider() { return Colisor(body); }
+	void setUnspawned () { Jogador::player2spawned = false; }
 
 private:
 	bool* twoplayers;
 	bool canJump;
 	bool isJumping;
-	float jumpHeight; //200.f
+	float jumpHeight;
 	int fase;
-	Arma* arma;
+	sf::Text vida;
+	sf::Font font;
+	static bool player2spawned;
 
 
 };
