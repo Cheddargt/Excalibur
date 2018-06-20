@@ -5,14 +5,13 @@
 #include "Esqueleto.h"
 #include "Chefao.h"
 #include "Item.h"
-#include "Plataforma.h"
-#include "Obstaculo.h"
-#include "Checkpoint.h"
 #include "Jogador.h"
 #include <iostream>
 #include <vector>
 #include <time.h>
-
+#include "Plataforma.h"
+#include "Obstaculo.h"
+#include "Checkpoint.h"
 
 using namespace std;
 
@@ -29,9 +28,8 @@ protected:
 	sf::Texture backgroundTexture;
 	sf::Texture background2Texture;
 	sf::Texture plataformaTexture;
-	sf::Vector2f direcao;
+	sf::Vector2f direcao; 
 	float deltaTime;
 	sf::Clock clock;
-	
+	bool pausou; 
 };
-

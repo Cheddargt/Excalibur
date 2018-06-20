@@ -20,5 +20,7 @@ private:
 	int selectedItemIndex;
 	sf::Font font;
 	sf::Text menu[MAX_NUMBER_OF_ITEMS];
+	sf::Text pausar; //adicionei isso
+	sf::Text continuar; //adicionei isso
 };
 

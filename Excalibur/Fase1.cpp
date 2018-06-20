@@ -38,11 +38,13 @@ Fase1::Fase1()
 
 Fase1::~Fase1()
 {
+
 	delete evnt;
 }
 
 int Fase1::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers)
 {
+	
 	this->twoplayers = twoplayers;
 
 
@@ -88,6 +90,19 @@ int Fase1::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 		{
 			switch (evnt->type)
 			{
+			case sf::Event::KeyReleased: //pausar o jogo //adicionei isso
+				switch ((*evnt).key.code)//adicionei isso
+				{
+				case sf::Keyboard::Escape://adicionei isso
+					pausou = true;//adicionei isso
+					break;//adicionei isso
+
+				case sf::Keyboard::F5://adicionei isso
+					pausou = false;//adicionei isso
+					break;//adicionei isso
+				}//adicionei isso
+				break;//adicionei isso
+
 			case sf::Event::Closed:
 				window.close();
 				break;
@@ -98,6 +113,8 @@ int Fase1::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 			}
 		}
 
+		if (!pausou)//condição para pausar
+		{
 		player->playerUpdate(deltaTime, twoplayers);
 
 		if (*twoplayers)
@@ -108,6 +125,7 @@ int Fase1::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 
 		for (Morcego& morcego : morcegos)
 			morcego.Update(deltaTime);
+		}
 
 		for (Item& plataforma : plataformas) //checa todas as plataformas pra ver se alguma delas está colidindo com player
 		{

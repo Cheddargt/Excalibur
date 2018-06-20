@@ -18,6 +18,7 @@ private:
 	sf::Texture chefaoTexture;
 	sf::Texture caixaTexture;
 	sf::Texture espinhoTexture;
+
 	std::vector<Plataforma> plataformas;
 	std::vector<Plataforma> caixas;
 	std::vector<Obstaculo> obstaculos;

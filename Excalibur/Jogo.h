@@ -16,7 +16,6 @@ public:
 	void Executar();
 	~Jogo();
 	void ResizeView(const sf::RenderWindow& window, sf::View& view);
-	/*void setWindow () { }*/
 
 private:
 	
