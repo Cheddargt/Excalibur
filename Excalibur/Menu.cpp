@@ -14,31 +14,31 @@ Menu::Menu(float width, float height)
 	menu[0].setFillColor(sf::Color::Red);
 	menu[0].setString("Jogar modo continuo");
 	menu[0].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 1));
-	menu[0].setCharacterSize(20);//adicionei isso
+	menu[0].setCharacterSize(20);
 
 	menu[1].setFont(font);
 	menu[1].setFillColor(sf::Color::White);
 	menu[1].setString("Pular direto para fase 2");
 	menu[1].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 2));
-	menu[1].setCharacterSize(20);//adicionei isso
+	menu[1].setCharacterSize(20);
 
 	menu[2].setFont(font);
 	menu[2].setFillColor(sf::Color::White);
 	menu[2].setString("Sair");
 	menu[2].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 3));
-	menu[2].setCharacterSize(20);//adicionei isso
+	menu[2].setCharacterSize(20);
 
-	pausar.setString("Para pausar aperte ESC"); //adicionei isso daqui no menu pra falar como pausar //adicionei isso
-	pausar.setFont(font);//adicionei isso
-	pausar.setFillColor(sf::Color::Yellow);//adicionei isso
-	pausar.setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 4));//adicionei isso
-	pausar.setCharacterSize(14);//adicionei isso//adicionei isso
+	pausar.setString("Para pausar aperte ESC"); 
+	pausar.setFont(font);
+	pausar.setFillColor(sf::Color::Yellow);
+	pausar.setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 4));
+	pausar.setCharacterSize(14);
 
-	continuar.setString("Para continuar aperte F5"); //e como despausar//adicionei isso
-	continuar.setFont(font);//adicionei isso
-	continuar.setFillColor(sf::Color::Yellow);//adicionei isso
-	continuar.setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 5));//adicionei isso
-	continuar.setCharacterSize(14); //função para colocar o tamanho da letra//adicionei isso
+	continuar.setString("Para continuar aperte F5"); 
+	continuar.setFont(font);
+	continuar.setFillColor(sf::Color::Yellow);
+	continuar.setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 5));
+	continuar.setCharacterSize(14); 
 
 	selectedItemIndex = 0;
 }
@@ -54,6 +54,8 @@ void Menu::Draw(sf::RenderWindow &window)
 	{
 		window.draw(menu[i]);
 	}
+	window.draw(pausar);
+	window.draw(continuar);
 }
 
 void Menu::MoveUp()
@@ -68,7 +70,7 @@ void Menu::MoveUp()
 
 void Menu::MoveDown()
 {
-	if (selectedItemIndex + 1 < MAX_NUMBER_OF_ITEMS)
+	if (selectedItemIndex + 1 < 3)
 	{
 		menu[selectedItemIndex].setFillColor(sf::Color::White);
 		selectedItemIndex++;

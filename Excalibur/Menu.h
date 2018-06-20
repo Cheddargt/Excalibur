@@ -1,9 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-#define MAX_NUMBER_OF_ITEMS 3
-
-//Esse é o básico do menu. Podemos adicionar ainda mais alguns itens caso seja necessário.
+#define MAX_NUMBER_OF_ITEMS 5
 
 class Menu
 {
@@ -20,7 +18,7 @@ private:
 	int selectedItemIndex;
 	sf::Font font;
 	sf::Text menu[MAX_NUMBER_OF_ITEMS];
-	sf::Text pausar; //adicionei isso
-	sf::Text continuar; //adicionei isso
+	sf::Text pausar; 
+	sf::Text continuar; 
 };
 

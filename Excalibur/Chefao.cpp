@@ -111,27 +111,27 @@ void Chefao::Draw(sf::RenderWindow& window)
 
 void Chefao::OnCollision(sf::Vector2f direcao)
 {
-	if (direcao.x < 0.0f)		//Colisão à direita
+	if (direcao.x < 0.0f)		
 	{
 		velocidade.x = 0.0f;
 		moveRight = false;
 		tempoEsquerda = relogio2.restart().asSeconds();
 	}
 
-	else if (direcao.x > 0.0f)		//Colisão na esquerda
+	else if (direcao.x > 0.0f)		
 	{
 		velocidade.x = 0.0f;
 		moveRight = true;
 		tempoEsquerda = relogio2.restart().asSeconds();
 	}
 
-	if (direcao.y < 0.0f)		//Colisão em cima
+	if (direcao.y < 0.0f)		
 	{
 		velocidade.y = 0.0f;
 		moveUp = true;
 		tempoDescida = relogio1.restart().asSeconds();
 	}
-	else if (direcao.y > 0.0f)		//Colisão embaixo
+	else if (direcao.y > 0.0f)		
 	{
 		moveUp = false;
 		velocidade.y = 0.0f;

@@ -1,2 +1,16 @@
-﻿  Fase2.cpp
+﻿  Chefao.cpp
+  Esqueleto.cpp
+  Fase.cpp
+  Fase1.cpp
+  Fase2.cpp
+  Gosma.cpp
+  Inimigo.cpp
+  Jogador.cpp
+  Jogo.cpp
+  Menu.cpp
+  Morcego.cpp
+  Personagem.cpp
+  main.cpp
+  Gerando Código...
+c:\users\lenovo t430\lenovo-t430 salvar\utfpr\prog2\excalibur\excalibur\fase1.cpp(254): warning C4715: 'Fase1::Executar': nem todos os caminhos de controle retornam um valor
   Excalibur.vcxproj -> C:\Users\Lenovo T430\Lenovo-T430 Salvar\UTFPR\Prog2\Excalibur\Debug\Excalibur.exe

@@ -41,11 +41,13 @@ Fase2::~Fase2()
 
 int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers)
 {
+
+	this->twoplayers = twoplayers;
+
 	player->SetPosition(120.0f, -200.0f);
 	if (*twoplayers)
 		(*player2)->SetPosition(120.0f, -200.0f);
-	this->twoplayers = twoplayers;
-
+	
 
 	for (int i = 0; i < num_esqueletos; i++)
 	{
@@ -81,18 +83,18 @@ int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 			switch (evnt->type)
 			{
 
-			case sf::Event::KeyReleased: //pausar o jogo //adicionei isso
-				switch ((*evnt).key.code)//adicionei isso
+			case sf::Event::KeyReleased: //pausar o jogo 
+				switch ((*evnt).key.code)
 				{
-				case sf::Keyboard::Escape://adicionei isso
-					pausou = true;//adicionei isso
-					break;//adicionei isso
+				case sf::Keyboard::Escape:
+					pausou = true;
+					break;
 
-				case sf::Keyboard::F5://adicionei isso
-					pausou = false;//adicionei isso
-					break;//adicionei isso
-				}//adicionei isso
-				break;//adicionei isso
+				case sf::Keyboard::F5:
+					pausou = false;
+					break;
+				}
+				break;
 
 			case sf::Event::Closed:
 				window.close();
@@ -105,7 +107,7 @@ int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 			}
 		}
 
-		if (!pausou)//condição para pausar
+		if (!pausou)
 		{
 			player->playerUpdate(deltaTime, twoplayers);
 
@@ -205,8 +207,8 @@ int Fase2::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 		}
 
 
-		view.setCenter(player->GetPosition()); //depois de update sempre
-		window.clear(sf::Color(30, 30, 30)); // RED=0, GREEN=255, BLUE=0
+		view.setCenter(player->GetPosition()); 
+		window.clear(sf::Color(30, 30, 30)); 
 		window.draw(background);
 		window.setView(view);
 		player->Draw(window);

@@ -90,18 +90,18 @@ int Fase1::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 		{
 			switch (evnt->type)
 			{
-			case sf::Event::KeyReleased: //pausar o jogo //adicionei isso
-				switch ((*evnt).key.code)//adicionei isso
+			case sf::Event::KeyReleased: //pausar o jogo 
+				switch ((*evnt).key.code)
 				{
-				case sf::Keyboard::Escape://adicionei isso
-					pausou = true;//adicionei isso
-					break;//adicionei isso
+				case sf::Keyboard::Escape:
+					pausou = true;
+					break;
 
-				case sf::Keyboard::F5://adicionei isso
-					pausou = false;//adicionei isso
-					break;//adicionei isso
-				}//adicionei isso
-				break;//adicionei isso
+				case sf::Keyboard::F5:
+					pausou = false;
+					break;
+				}
+				break;
 
 			case sf::Event::Closed:
 				window.close();
@@ -113,7 +113,7 @@ int Fase1::Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window
 			}
 		}
 
-		if (!pausou)//condição para pausar
+		if (!pausou) //condição para pausar
 		{
 		player->playerUpdate(deltaTime, twoplayers);
 

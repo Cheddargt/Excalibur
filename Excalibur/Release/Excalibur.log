@@ -1,9 +1,25 @@
-﻿  Fase2.cpp
+﻿  stdafx.cpp
+  Animacao.cpp
+  Checkpoint.cpp
+  Chefao.cpp
+  Esqueleto.cpp
+  Fase.cpp
+  Fase1.cpp
+  Fase2.cpp
+  Gosma.cpp
+  Inimigo.cpp
   Jogo.cpp
+  Morcego.cpp
+  Obstaculo.cpp
+  Personagem.cpp
+  Colisor.cpp
   main.cpp
+  Jogador.cpp
+  Menu.cpp
+  Item.cpp
+  Plataforma.cpp
   Gerando código
-  2 of 576 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+c:\users\lenovo t430\lenovo-t430 salvar\utfpr\prog2\excalibur\excalibur\fase1.cpp(254): warning C4715: 'Fase1::Executar': nem todos os caminhos de controle retornam um valor
+  All 581 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finalizada a geração de código
   Excalibur.vcxproj -> C:\Users\Lenovo T430\Lenovo-T430 Salvar\UTFPR\Prog2\Excalibur\Release\Excalibur.exe

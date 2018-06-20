@@ -8,7 +8,7 @@ public:
 	Fase1();
 	~Fase1();
 	int Executar(Jogador* player, Jogador **player2, sf::RenderWindow& window, sf::View& view, bool* twoplayers);
-	void ResizeView(const sf::RenderWindow& window, sf::View& view); //verificar
+	void ResizeView(const sf::RenderWindow& window, sf::View& view); 
 
 private:
 	bool *twoplayers;

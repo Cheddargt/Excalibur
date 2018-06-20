@@ -32,7 +32,7 @@ private:
 	sf::Clock clock;
 	float deltaTime;
 	bool two_players;
-	sf::Event evnt; //verificar
+	sf::Event evnt; 
 	
 };
 

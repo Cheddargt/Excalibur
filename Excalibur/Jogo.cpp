@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "Jogo.h"
 
-//classe plataforma derivada de item
-//delete vector
 
 Jogo::Jogo() :
 	window(sf::VideoMode(512, 512), "Excalibur", sf::Style::Close | sf::Style::Resize),
@@ -12,7 +10,7 @@ Jogo::Jogo() :
 	menu = new Menu(static_cast <float> (window.getSize().x), static_cast <float> (window.getSize().y));
 	playerTexture.loadFromFile("tux_menino.png");
 	player2Texture.loadFromFile("tux_menina.png");
-	player = new Jogador(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 5, 1, 0, 200.f, 1); //speed = 100.0f
+	player = new Jogador(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 5, 1, 0, 200.f, 1); 
 	player2 = new Jogador(&player2Texture, sf::Vector2u(3, 9), 0.3f, 100.0f, 5, 1, 1, 200.f, 1);
 	fase01 = new Fase1;
 	fase02 = new Fase2;
@@ -121,52 +119,3 @@ void Jogo::Executar()
 	}
 }
 
-//void Jogo::Executar()
-//{
-//
-//	while (window.isOpen())
-//	{
-//		deltaTime = clock.restart().asSeconds();
-//		if (deltaTime > 1.0f / 20.0f)
-//			deltaTime = 1.0f / 20.0f;
-//
-//		sf::Event evnt; //verificar
-//
-//		while (window.pollEvent(evnt))
-//		{
-//			switch (evnt.type)
-//			{
-//
-//			case sf::Event::Closed:
-//				window.close();
-//				break;
-//
-//			case sf::Event::Resized:
-//				ResizeView(window, view);
-//				break;
-//			}
-//
-//		}
-//
-//	/*	while (!fase1_zerada)
-//		{*/
-//			if (fase02->Executar(player, &player2, window, view, &two_players))
-//			{
-//				fase1_zerada = true;
-//				if (fase02->Executar(player, &player2, window, view, &two_players))
-//					printf("You win!\n");
-//			}
-//			else
-//			{
-//				printf("You died :(!\n");
-//				player = new Jogador(&playerTexture, sf::Vector2u(3, 9), 0.3f, 100.0f, 5, 1, 0, 200.f, 1);
-//				player2 = new Jogador(&player2Texture, sf::Vector2u(3, 9), 0.3f, 100.0f, 5, 1, 1, 200.f, 1);
-//				player2->setUnspawned();
-//			}
-//
-//		//}
-//
-//
-//	}
-//
-//}

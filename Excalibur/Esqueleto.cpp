@@ -32,7 +32,7 @@ void Esqueleto::Update(float deltaTime)
 	else
 		velocidade.x = -speed;
 
-	velocidade.y += 981.0f * deltaTime; //gravidade
+	velocidade.y += 981.0f * deltaTime;
 
 	if (velocidade.x == 0.0f)
 		row = 0;
@@ -48,7 +48,7 @@ void Esqueleto::Update(float deltaTime)
 
 	animacao.Update(row, deltaTime, faceRight);
 	body.setTextureRect(animacao.uvRect);
-	body.move(velocidade * deltaTime); //move não ser mais frame-específico
+	body.move(velocidade * deltaTime); 
 }
 
 void Esqueleto::Draw(sf::RenderWindow& window)
